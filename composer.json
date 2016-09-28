@@ -1,7 +1,7 @@
 {
-  "name": "isics/OpenMiamMiamBundle",
+  "name": "isics/openmiammiam-bundle",
   "type": "openmiammiam-bundle",
-  "description": "OpenMiamMiam Bundle",
+  "description": "OpenMiamMiam Core Bundle",
   "keywords": [],
   "homepage": "https://github.com/isics/OpenMiamMiam",
   "license": "AGPL-3.0",
