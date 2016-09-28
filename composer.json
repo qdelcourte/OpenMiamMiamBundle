@@ -1,0 +1,43 @@
+{
+  "name": "isics/OpenMiamMiamBundle",
+  "type": "openmiammiam-bundle",
+  "description": "OpenMiamMiam Bundle",
+  "keywords": [],
+  "homepage": "https://github.com/isics/OpenMiamMiam",
+  "license": "AGPL-3.0",
+  "authors": [
+    {
+      "name": "Isics",
+      "homepage": "http://www.isics.fr"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "symfony/symfony": "2.8.*",
+    "doctrine/orm": "^2.4.8",
+    "doctrine/dbal": "<2.5",
+    "doctrine/doctrine-bundle": "1.6.*",
+    "symfony/swiftmailer-bundle": "~2.3",
+    "symfony/monolog-bundle": "~2.4",
+    "sensio/distribution-bundle": "~5.0",
+    "sensio/framework-extra-bundle": "^3.0.2",
+    "incenteev/composer-parameter-handler": "~2.0",
+    "jms/serializer-bundle": "1.1.*",
+    "stof/doctrine-extensions-bundle": "1.2.*",
+    "symfony/assetic-bundle": "2.8.*",
+    "twig/extensions": "1.3.*",
+    "friendsofsymfony/user-bundle": "~2.0@dev",
+    "liip/imagine-bundle": "1.6.*",
+    "knplabs/knp-menu": "2.1.*",
+    "knplabs/knp-menu-bundle": "2.1.*",
+    "white-october/pagerfanta-bundle": "dev-master",
+    "sonata-project/intl-bundle": "2.2.*",
+    "stfalcon/tinymce-bundle": "1.1.*",
+    "tecnickcom/tcpdf": "6.0.068",
+    "phpoffice/phpexcel": "1.7.9"
+  },
+  "autoload": {
+    "psr-4": { "Isics\\Bundle\\OpenMiamMiamBundle\\": "" }
+  },
+  "minimum-stability": "dev"
+}
