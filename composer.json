@@ -28,7 +28,7 @@
     "sonata-project/intl-bundle": "2.2.*",
     "stfalcon/tinymce-bundle": "1.1.*",
     "tecnickcom/tcpdf": "6.0.068",
-    "phpoffice/phpexcel": "1.7.9",
+    "phpoffice/phpexcel": "1.7.9"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^2.3",
