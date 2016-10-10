@@ -31,6 +31,13 @@
     "phpoffice/phpexcel": "1.7.9",
     "isics/openmiammiam-user-bundle": "dev-master"
   },
+  "require-dev": {
+    "doctrine/doctrine-fixtures-bundle": "^2.3",
+    "fzaninotto/faker": "^1.6",
+    "behat/symfony2-extension": "^2.1",
+    "behat/mink-extension": "^2.2",
+    "behat/mink-goutte-driver": "^1.2"
+  },
   "autoload": {
     "psr-4": { "Isics\\Bundle\\OpenMiamMiamBundle\\": "" }
   }
