@@ -15,8 +15,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class LoadAssociationData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
@@ -51,6 +51,7 @@ class LoadAssociationData extends AbstractFixture implements OrderedFixtureInter
         $association->setClosingDelay(86400);
         $association->setOpeningDelay(86400);
         $association->setDefaultCommission(10);
+        $association->setEmail('contact@domain.tld');
 
         $manager->persist($association);
         $manager->flush();

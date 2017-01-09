@@ -11,10 +11,10 @@
 
 namespace Isics\Bundle\OpenMiamMiamBundle\Entity;
 
-use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 
 /**
  * Isics\OpenMiamMiamBundle\Entity\Association
@@ -166,6 +166,15 @@ class Association
      * @ORM\OneToMany(targetEntity="Isics\Bundle\OpenMiamMiamBundle\Entity\Payment", mappedBy="association")
      */
     private $payments;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=128)
+     */
+    private $email;
+
+
 
     /**
      * Constructor
@@ -757,5 +766,29 @@ class Association
     public function getPayments()
     {
         return $this->payments;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Association
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }

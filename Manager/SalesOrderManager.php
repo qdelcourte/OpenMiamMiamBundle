@@ -15,11 +15,11 @@ use Isics\Bundle\OpenMiamMiamBundle\Entity\BranchOccurrence;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Product;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\SalesOrder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\SalesOrderRow;
-use Isics\Bundle\OpenMiamMiamBundle\Model\Product\ArtificialProduct;
-use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Cart\Cart;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Mailer;
+use Isics\Bundle\OpenMiamMiamBundle\Model\Product\ArtificialProduct;
 use Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\SalesOrderConfirmation;
+use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -554,7 +554,10 @@ class SalesOrderManager
             return;
         }
 
+        $association = $order->getBranchOccurrence()->getBranch()->getAssociation();
+
         $message = $this->mailer->getNewMessage()
+                ->setFrom(array($association->getEmail() => $association->getName()))
                 ->setTo($order->getUser()->getEmail())
                 ->setSubject(
                     $this->mailer->translate(
@@ -565,7 +568,10 @@ class SalesOrderManager
                 ->setBody(
                     $this->mailer->render(
                         'IsicsOpenMiamMiamBundle:Mail:consumerNewSalesOrder.html.twig',
-                        array('order' => $order)
+                        array(
+                            'order' => $order,
+                            'association' => $association
+                        )
                     ),
                     'text/html'
                 );
