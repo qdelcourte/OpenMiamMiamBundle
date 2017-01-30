@@ -26,6 +26,10 @@ my_profile:           "Éditer mon profil"
 my_sales_orders:      "Voir mes commandes"
 artificial_product:   "Produit divers"
 catalog:              "Catalogue"
+Sales orders:         "Commandes"
+New payment:          "Nouveau règlement"
+Amount:               "Montant"
+Type:                 "Moyen de règlement"
 
 
 
