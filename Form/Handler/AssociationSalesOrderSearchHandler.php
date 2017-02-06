@@ -5,6 +5,7 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Form\Handler;
 use Doctrine\ORM\QueryBuilder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Repository\SalesOrderRepository;
+use Isics\Bundle\OpenMiamMiamBundle\Form\Type\AssociationConsumerSalesOrderSearchType;
 use Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\AssociationConsumerSalesOrdersFilter;
 use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -43,7 +44,7 @@ class AssociationSalesOrderSearchHandler
     public function createSearchForm(Association $association)
     {
         return $this->formFactory->create(
-            'open_miam_miam_association_sales_order_search',
+            AssociationConsumerSalesOrderSearchType::class,
             new AssociationConsumerSalesOrdersFilter(),
             [
                 'association' => $association,
@@ -83,4 +84,4 @@ class AssociationSalesOrderSearchHandler
 
         return $qb;
     }
-} 
+}
