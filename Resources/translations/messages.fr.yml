@@ -148,7 +148,7 @@ availability.available_at:    "Dispo le %date%"
 
 # Availability for backend
 backend.availability:                 "Dispo"
-backend.availability.unavailable:     "Pas de catalogue"
+backend.availability.unavailable:     "Pas au catalogue"
 backend.availability.available:       "Dispo"
 backend.availability.in_stock:        "%stock% en stock"
 backend.availability.out_of_stock:    "Plus de stock"
