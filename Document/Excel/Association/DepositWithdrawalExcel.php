@@ -14,7 +14,7 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Association;
 use Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Tools;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\BranchOccurrence;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Document\ProducersDepositWithdrawal;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DepositWithdrawalExcel
 {
@@ -24,7 +24,7 @@ class DepositWithdrawalExcel
     protected $excel;
 
     /**
-     * @var \Symfony\Component\Translation\Translator
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
     protected $translator;
 
@@ -79,10 +79,10 @@ class DepositWithdrawalExcel
      * Constructor
      *
      * @param \PHPExcel $excel
-     * @param \Symfony\Component\Translation\Translator $translator
+     * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param $currency
      */
-    public function __construct(\PHPExcel $excel, Translator $translator, $currency)
+    public function __construct(\PHPExcel $excel, TranslatorInterface $translator, $currency)
     {
         $this->excel        = $excel;
         $this->translator   = $translator;
