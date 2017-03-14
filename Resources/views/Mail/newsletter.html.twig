@@ -16,6 +16,8 @@
 {% endblock %}
 
 {% block signature %}
-    <hr />
-    {{ newsletter.association.getName() }}
+    {% if newsletter.association is not null %}
+        <hr />
+        {{ newsletter.association.getName() }}
+    {% endif %}
 {% endblock %}
