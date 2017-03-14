@@ -190,7 +190,7 @@ class NewsletterManager
         $recipientType = $newsletter->getRecipientType();
         $association = $newsletter->getAssociation();
 
-        $fromMail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
+        $fromEmail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
         $fromName = (null !== $association) ? $association->getName() : $this->mailerConfig['sender_name'];
 
         $userRepository = $this->entityManager->getRepository('IsicsOpenMiamMiamUserBundle:User');
@@ -246,7 +246,7 @@ class NewsletterManager
                 $body = str_replace(array('[FIRSTNAME]', '[LASTNAME]'), array($this->userExtension->formatUserIdentity($recipient, '%firstname%'), $this->userExtension->formatUserIdentity($recipient, '%lastname%')), $body);
 
                 $message = \Swift_Message::newInstance()
-                    ->setFrom($fromMail, $fromName)
+                    ->setFrom($fromEmail, $fromName)
                     ->setTo($recipient->getEmail())
                     ->setSubject($newsletter->getSubject())
                     ->setBody($body, 'text/html');
@@ -270,7 +270,7 @@ class NewsletterManager
     {
         $association = $newsletter->getAssociation();
 
-        $fromMail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
+        $fromEmail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
         $fromName = (null !== $association) ? $association->getName() : $this->mailerConfig['sender_name'];
 
         $body = $this->engine->render('IsicsOpenMiamMiamBundle:Mail:newsletterTest.html.twig', array('newsletter' => $newsletter));
@@ -278,7 +278,7 @@ class NewsletterManager
         $body = str_replace(array('[FIRSTNAME]', '[LASTNAME]'), array($this->userExtension->formatUserIdentity($user, '%firstname%'), $this->userExtension->formatUserIdentity($user, '%lastname%')), $body);
 
         $message = \Swift_Message::newInstance()
-            ->setFrom($fromMail, $fromName)
+            ->setFrom($fromEmail, $fromName)
             ->setTo($user->getEmail())
             ->setSubject('[TEST] '.$newsletter->getSubject())
             ->setBody($body, 'text/html');
