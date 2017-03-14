@@ -190,6 +190,9 @@ class NewsletterManager
         $recipientType = $newsletter->getRecipientType();
         $association = $newsletter->getAssociation();
 
+        $fromMail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
+        $fromName = (null !== $association) ? $association->getName() : $this->mailerConfig['sender_name'];
+
         $userRepository = $this->entityManager->getRepository('IsicsOpenMiamMiamUserBundle:User');
 
         if ($recipientType === Newsletter::RECIPIENT_TYPE_CONSUMER || $recipientType === Newsletter::RECIPIENT_TYPE_ALL) {
@@ -243,7 +246,7 @@ class NewsletterManager
                 $body = str_replace(array('[FIRSTNAME]', '[LASTNAME]'), array($this->userExtension->formatUserIdentity($recipient, '%firstname%'), $this->userExtension->formatUserIdentity($recipient, '%lastname%')), $body);
 
                 $message = \Swift_Message::newInstance()
-                    ->setFrom(array($association->getEmail() => $association->getName()))
+                    ->setFrom($fromMail, $fromName)
                     ->setTo($recipient->getEmail())
                     ->setSubject($newsletter->getSubject())
                     ->setBody($body, 'text/html');
@@ -267,12 +270,15 @@ class NewsletterManager
     {
         $association = $newsletter->getAssociation();
 
+        $fromMail = (null !== $association) ? $association->getEmail() : $this->mailerConfig['sender_address'];
+        $fromName = (null !== $association) ? $association->getName() : $this->mailerConfig['sender_name'];
+
         $body = $this->engine->render('IsicsOpenMiamMiamBundle:Mail:newsletterTest.html.twig', array('newsletter' => $newsletter));
 
         $body = str_replace(array('[FIRSTNAME]', '[LASTNAME]'), array($this->userExtension->formatUserIdentity($user, '%firstname%'), $this->userExtension->formatUserIdentity($user, '%lastname%')), $body);
 
         $message = \Swift_Message::newInstance()
-            ->setFrom(array($association->getEmail() => $association->getName()))
+            ->setFrom($fromMail, $fromName)
             ->setTo($user->getEmail())
             ->setSubject('[TEST] '.$newsletter->getSubject())
             ->setBody($body, 'text/html');
