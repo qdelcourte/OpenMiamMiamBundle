@@ -118,7 +118,7 @@ class ProducerController extends BaseController
      */
     public function exportAction(Request $request, Association $association)
     {
-        $date = $request->get('open_miam_miam_association_producer_export_transfert');
+        $date = $request->get('open_miam_miam_association_producer_export_transfer');
         $monthDate = new \DateTime($date['month']);
 
         $producerTransfer = $this->get('open_miam_miam.association_manager')
