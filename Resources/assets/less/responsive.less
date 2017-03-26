@@ -13,3 +13,45 @@
     display: none;
   }
 }
+
+//
+// Cart
+//
+
+.btn-cart {
+  position: relative;
+  padding: 4px 9px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: none;
+  display: block;
+
+  > .glyphicon-shopping-cart {
+    font-size: 28px;
+  }
+
+  .cart-items-number {
+    position: absolute;
+    font-weight: bold;
+    font-size: 10px;
+    left: 20px;
+    top: 16px;
+    color: #FFF;
+  }
+
+  .small-price {
+    float: right;
+    line-height: 30px;
+    margin-left: 5px;
+  }
+
+  &.has-item {
+    color: #FFF;
+    background-color: @brand-danger;
+    border-color: #FFF;
+
+    .cart-items-number {
+      background-color: @brand-danger;
+    }
+  }
+}
