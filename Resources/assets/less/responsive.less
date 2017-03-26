@@ -1,0 +1,15 @@
+//
+// Custom visibility class
+//
+
+.desktop-only {
+  @media (max-width: @screen-sm-max) {
+    display: none;
+  }
+}
+
+.phone-only {
+  @media (min-width: @screen-md-min) {
+    display: none;
+  }
+}
