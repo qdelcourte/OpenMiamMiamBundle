@@ -1,16 +1,16 @@
 {% if not cart.isClosed %}
     {% if cart.nbItems > 0 %}
+        <strong class="cart-title desktop-only">{{ 'cart.title'|trans }}</strong>
         <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn-cart has-item">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span class="cart-items-number">{{ cart.nbItems }}</span>
-            <span class="cart-title desktop-only">{{ 'cart.title'|trans }}</span>
             <span class="small-price">{{ cart.total|number_format_currency(open_miam_miam.currency) }}</span>
         </a>
     {% else %}
+        <strong class="cart-title desktop-only">{{ 'cart.title'|trans }}</strong>
         <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn-cart">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span class="cart-items-number">0</span>
-            <span class="cart-title desktop-only">{{ 'cart.title'|trans }}</span>
             <span class="cart-empty desktop-only">{{ 'cart.empty'|trans }}</span>
         </a>
     {% endif %}
