@@ -1,6 +1,6 @@
 #slideout {
   .slideout-overlay {
-    transition: opacity @transition-time ease;
+    transition: opacity @transition-time ease, z-index 0s linear @transition-time;
 
     @media (max-width: @screen-xs-max) {
       position: fixed;
@@ -35,6 +35,7 @@
     .slideout-overlay {
       opacity: 1;
       z-index: 1000;
+      transition: z-index 0s linear 0s;
     }
 
     .slideout-content {
