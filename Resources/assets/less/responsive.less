@@ -51,7 +51,9 @@
 
   #header-logo,
   #header-branch-name {
-    line-height: 30px;
+    @media (max-width: @screen-xs-max) {
+      line-height: 30px;
+    }
   }
 
   #header-logo {
@@ -226,38 +228,75 @@
 
 .btn-cart {
   position: relative;
-  margin-bottom: 5px;
-  padding: 4px 9px;
-  margin-top: 5px;
-  display: block;
+  display: inline-block;
+  text-align: left;
   border: none;
 
+  @media (max-width: @screen-xs-max) {
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 4px 9px;
+    margin-top: 5px;
+    display: block;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
   > .glyphicon-shopping-cart {
-    font-size: 28px;
+    font-size: 35px;
+    margin-right: 15px;
+    float: left;
+    
+    @media (max-width: @screen-xs-max) {
+      font-size: 28px;
+      margin-right: 0;
+      float: none;
+    }
+  }
+  
+  .cart-empty {
+    display: block;
+    white-space: nowrap;
   }
 
   .cart-items-number {
     position: absolute;
     font-weight: bold;
     font-size: 11px;
-    color: @navbar-cart-inumber-color;
-    left: 18px;
-    top: 8px;
+    color: #FFF;
+    left: 12px;
+    top: 7px;
+
+    @media (max-width: @screen-xs-max) {
+      color: @navbar-cart-inumber-color;
+      left: 18px;
+      top: 8px;
+    }
   }
 
   .small-price {
-    float: right;
-    line-height: 30px;
-    margin-left: 5px;
+    display: block;
+
+    @media (max-width: @screen-xs-max) {
+      float: right;
+      line-height: 30px;
+      margin-left: 5px;
+    }
   }
 
   &.has-item {
-    color: #FFF;
-    background-color: @navbar-cart-bg-witem;
-    border-color: #FFF;
+    @media (max-width: @screen-xs-max) {
+      color: #FFF;
+      background-color: @navbar-cart-bg-witem;
+    }
 
     .cart-items-number {
-      color: @navbar-cart-inumber-color-witem;
+      @media (max-width: @screen-xs-max) {
+        color: @navbar-cart-inumber-color-witem;
+      }
     }
   }
 }

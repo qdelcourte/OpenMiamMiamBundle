@@ -1,36 +1,18 @@
 {% if not cart.isClosed %}
     {% if cart.nbItems > 0 %}
-        <div class="desktop-only">
-            <strong>
-                {{ 'cart.title'|trans }}
-                <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}">
-                    ({{ cart.nbItems }})
-                    {{ cart.total|number_format_currency(open_miam_miam.currency) }}
-                </a>
-            </strong>
-            <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn btn-primary btn-block">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                {{ 'cart.checkout'|trans }}
-            </a>
-        </div>
-        <div class="phone-only">
-            <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn btn-default btn-cart btn-block has-item">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <span class="cart-items-number">{{ cart.nbItems }}</span>
-                <span class="small-price">{{ cart.total|number_format_currency(open_miam_miam.currency) }}</span>
-            </a>
-        </div>
+        <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn-cart has-item">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span class="cart-items-number">{{ cart.nbItems }}</span>
+            <span class="cart-title desktop-only">{{ 'cart.title'|trans }}</span>
+            <span class="small-price">{{ cart.total|number_format_currency(open_miam_miam.currency) }}</span>
+        </a>
     {% else %}
-        <div class="desktop-only">
-            <strong>{{ 'cart.title'|trans }} (0)</strong><br>
-            {{ 'cart.empty'|trans }}
-        </div>
-        <div class="phone-only">
-            <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn btn-default btn-cart btn-block">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <span class="cart-items-number">0</span>
-            </a>
-        </div>
+        <a href="{{ path('open_miam_miam.cart.show', {'branchSlug': branch.slug}) }}" class="btn-cart">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span class="cart-items-number">0</span>
+            <span class="cart-title desktop-only">{{ 'cart.title'|trans }}</span>
+            <span class="cart-empty desktop-only">{{ 'cart.empty'|trans }}</span>
+        </a>
     {% endif %}
 {% else %}
     <div class="desktop-only">
@@ -39,7 +21,7 @@
         {{ 'cart.order_closed'|trans }}
     </div>
     <div class="phone-only">
-        <button class="btn btn-default btn-cart disabled">
+        <button class="btn-cart disabled">
             <span class="glyphicon glyphicon-shopping-cart"></span>
             <span class="cart-items-number">0</span>
         </button>
