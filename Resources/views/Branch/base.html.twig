@@ -40,9 +40,9 @@
             <div class="slideout-overlay">
             </div>
             <div class="slideout-content">
-                <nav id="categories">
-                    {{ render(controller('IsicsOpenMiamMiamBundle:Catalog:ShowCategories', {'branch': branch})) }}
-                </nav>
+
+                {{ render(controller('IsicsOpenMiamMiamBundle:Catalog:ShowCategories', {'branch': branch})) }}
+
                 <div class="producers-show-attendance-container">
                     <a href="{{ path('open_miam_miam.branch.producers.attendance', { 'branchSlug': branch.slug }) }}"
                        class="btn btn-success">
