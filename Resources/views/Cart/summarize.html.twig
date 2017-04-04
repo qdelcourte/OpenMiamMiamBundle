@@ -8,7 +8,7 @@
 
 {% set branchOccurenceClass=(nextBranchOccurrence is not null and openingDateTime is not null) ? 'closed' : '' %}
 
-<div id="header-branch-name" class="col-md-3 col-md-offset-3 col-sm-4">
+<div id="header-branch-name" class="col-md-3 col-md-offset-3 col-sm-4 col-sm-offset-1">
     {% if homepage %}
         <h1 class="branch-title">
             <span class="ellipsis">{{ branch.city }}</span>
@@ -49,6 +49,6 @@
     {% endif %}
 </div>
 
-<div id="header-cart" class="col-md-3 col-sm-4">
+<div id="header-cart" class="col-md-3 col-sm-3">
     {% include 'IsicsOpenMiamMiamBundle:Cart:headerCart.html.twig' %}
 </div>
