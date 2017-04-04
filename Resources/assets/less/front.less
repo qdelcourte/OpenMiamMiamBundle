@@ -1,7 +1,9 @@
 @import "variables.less";
 @import "../../../../../../web/bootstrap/less/mixins.less";
 @import "responsive.less";
+@import "branch-navbar.less";
 @import "slideout.less";
+
 
 //
 // Common
@@ -41,55 +43,6 @@ header {
     padding: 0;
     list-style-type: none;
 }
-
-#header-branch-name,
-#header-branch-occurrence,
-#header-cart {
-    padding: 5px 15px;
-
-    h1,
-    > strong {
-        display: block;
-        margin: 0;
-        font-size: @font-size-large;
-        font-weight: bold;
-        line-height: @line-height-base;
-
-        &.loading,
-        &.loading a {
-            color: @gray-light;
-        }
-    }
-}
-
-#header-branch-name {
-    clear: both;
-}
-
-@media screen and (min-width: 992px) {
-    #header-branch-occurrence {
-        border-right: 1px solid @panel-default-border;
-        border-left: 1px solid @panel-default-border;
-    }
-}
-
-#header-branch-change-link {
-    display: block;
-    font-size: @font-size-small;
-}
-
-#header-branch-occurrence-order-from {
-    margin-bottom: @line-height-computed;
-    color: @brand-danger;
-    font-size: @font-size-large;
-    font-weight: bold;
-}
-
-#header-branch-occurrence-order-before {
-    color: @brand-danger;
-    font-size: @font-size-small;
-}
-
 
 //
 // Breadcrumb
