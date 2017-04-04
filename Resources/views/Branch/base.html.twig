@@ -7,36 +7,55 @@
  #}
 {% extends 'IsicsOpenMiamMiamBundle::base.html.twig' %}
 
+{% block body_attributes ' class="page-branch"' %}
 {% block title %}{{ 'branch.homepage.title'|trans({'%branch_name%': branch.name}, 'seo') }}{% endblock %}
 {% block meta_description %}{{ 'branch.homepage.meta_description'|trans({'%branch_name%': branch.name}, 'seo') }}{% endblock %}
-
 {% block header %}
-    <header>
-        <div id="header-logo">
-            <a href="{{ path('open_miam_miam.branch.homepage', {'branchSlug': branch.slug }) }}">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
+    {% if homepage is not defined %}
+        {% set homepage=false %}
+    {% endif %}
+    <header class="navbar navbar-static-top" data-spy="affix" data-offset-top="30">
+        <div class="container header-container">
+            <div class="row">
+                <div id="header-logo">
+                    <a href="{{ path('open_miam_miam.branch.homepage', {'branchSlug': branch.slug }) }}" class="desktop-only">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
+                    <a href="{{ path('open_miam_miam.branch.homepage', {'branchSlug': branch.slug }) }}" class="phone-only">{% include 'IsicsOpenMiamMiamBundle::baseLogoMini.html.twig' %}</a>
+                </div>
+                {% include 'IsicsOpenMiamMiamBundle::headerNav.html.twig' %}
+                <button type="button" class="navbar-toggle" data-target="#slideout">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {{ render(controller('IsicsOpenMiamMiamBundle:Cart:Summarize', {'branch': branch, 'homepage': homepage})) }}
+            </div>
         </div>
-
-        {% if homepage is not defined %}
-            {% set homepage=false %}
-        {% endif %}
-        {{ render(controller('IsicsOpenMiamMiamBundle:Cart:Summarize', {'branch': branch, 'homepage': homepage})) }}
     </header>
 {% endblock %}
 
 {% block global_content %}
+
     <div class="row">
-        <div class="col-md-3" role="navigation">
-            {{ render(controller('IsicsOpenMiamMiamBundle:Catalog:ShowCategories', {'branch': branch})) }}
-            <div class="producers-show-attendance-container">
-                <a href="{{ path('open_miam_miam.branch.producers.attendance', { 'branchSlug': branch.slug }) }}"
-                   class="btn btn-success">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    {{ 'zone.next_occurrences.footer'|trans }}
-                </a>
+        <div class="col-md-3" role="navigation" id="slideout">
+            <div class="slideout-overlay">
             </div>
-            {{ render(controller('IsicsOpenMiamMiamBundle:Branch:ShowRandomProducers', {'branch': branch, limit: 5})) }}
-            {{ render(controller('IsicsOpenMiamMiamBundle:Branch:ShowNextOccurrences', {'branch': branch, limit: 3})) }}
-            {% include 'IsicsOpenMiamMiamBundle:Branch:location.html.twig' with {'branch': branch} %}
+            <div class="slideout-content">
+                <nav id="categories">
+                    {{ render(controller('IsicsOpenMiamMiamBundle:Catalog:ShowCategories', {'branch': branch})) }}
+                </nav>
+                <div class="producers-show-attendance-container">
+                    <a href="{{ path('open_miam_miam.branch.producers.attendance', { 'branchSlug': branch.slug }) }}"
+                       class="btn btn-success">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        {{ 'zone.next_occurrences.footer'|trans }}
+                    </a>
+                </div>
+                <div class="hidden-phone">
+                    {{ render(controller('IsicsOpenMiamMiamBundle:Branch:ShowRandomProducers', {'branch': branch, limit: 5})) }}
+                    {{ render(controller('IsicsOpenMiamMiamBundle:Branch:ShowNextOccurrences', {'branch': branch, limit: 3})) }}
+                    {% include 'IsicsOpenMiamMiamBundle:Branch:location.html.twig' with {'branch': branch} %}
+                </div>
+            </div>
         </div>
         <div class="col-md-9" role="main">
             {% include 'IsicsOpenMiamMiamBundle::messages.html.twig' %}

@@ -1,0 +1,16 @@
+<div class="branch-name visible-xs visible-sm">
+    {% if homepage %}
+        <h1 class="branch-title">
+            <span class="ellipsis">{{ branch.city }}</span>
+            <span class="departement-number">{{ '('~branch.departmentNumber~')' }}</span>
+        </h1>
+    {% else %}
+        <span class="branch-title">
+            <span class="ellipsis">{{ branch.city }}</span>
+            <span class="departement-number">{{ '('~branch.departmentNumber~')' }}</span>
+        </span>
+    {% endif %}
+    <a href="{{ path('open_miam_miam.homepage') }}" id="header-branch-change-link-responsive">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </a>
+</div>

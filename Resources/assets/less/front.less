@@ -1,6 +1,7 @@
 @import "variables.less";
 @import "../../../../../../web/bootstrap/less/mixins.less";
 @import "responsive.less";
+@import "slideout.less";
 
 //
 // Common
@@ -27,7 +28,6 @@
 // Header
 //
 header {
-    .make-row();
     margin-top: @line-height-computed;
 }
 
@@ -36,23 +36,15 @@ header {
     text-align: center;
 }
 
-#header-main {
-    .make-md-column(9);
-    .make-md-column-offset(3);
-
-    .panel-body {
-        padding: 0 15px !important;
-    }
-}
-
-#header-main-body {
-    .make-row();
+#header-nav {
+    float: right;
+    padding: 0;
+    list-style-type: none;
 }
 
 #header-branch-name,
 #header-branch-occurrence,
 #header-cart {
-    .make-md-column(4);
     padding: 5px 15px;
 
     h1,
@@ -69,6 +61,11 @@ header {
         }
     }
 }
+
+#header-branch-name {
+    clear: both;
+}
+
 @media screen and (min-width: 992px) {
     #header-branch-occurrence {
         border-right: 1px solid @panel-default-border;

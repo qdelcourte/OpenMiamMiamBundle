@@ -154,6 +154,25 @@ class BranchController extends Controller
     }
 
     /**
+     * Shows next occurrences
+     *
+     * @param Branch  $branch
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showNextOccurenceAction(Branch $branch)
+    {
+        $branchOccurrenceManager = $this->container->get('open_miam_miam.branch_occurrence_manager');
+
+        return $this->render('IsicsOpenMiamMiamBundle:Branch:showNextOccurrences.html.twig', array(
+            'branch'               => $branch,
+            'nextBranchOccurrence' => $branchOccurrenceManager->getNext($branch),
+            'closingDateTime'      => $branchOccurrenceManager->getClosingDateTime($branch),
+            'openingDateTime'      => $branchOccurrenceManager->getOpeningDateTime($branch)
+        ));
+    }
+
+    /**
      * Shows random producers
      *
      * @param Branch  $branch

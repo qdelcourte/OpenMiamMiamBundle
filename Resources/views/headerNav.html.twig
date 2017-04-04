@@ -1,0 +1,39 @@
+<ul id="header-nav">
+    {% if app.user %}
+        <li>
+                <a type="button" class="dropdown-toggle account" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="desktop-only">{{ 'hello_user'|trans({'%firstname%': app.user.firstname}) }}</span>
+                <span class="caret desktop-only"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                <li>
+                    <a href="{{ path('fos_user_profile_edit') }}">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        {{ 'my_profile'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_profile_orders') }}">
+                        <span class="glyphicon glyphicon-list"></span>
+                        {{ 'my_sales_orders'|trans }}
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        <span class="glyphicon glyphicon-off"></span>
+                        {{ 'logout'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    {% else %}
+        <li>
+            <a href="{{ path('fos_user_profile_edit') }}" class="account">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="desktop-only">{{ 'my_account'|trans }}</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>

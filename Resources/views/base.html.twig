@@ -32,57 +32,15 @@
         <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
     </head>
     <body{% block body_attributes %}{% endblock %}>
-        <div class="container">
-            {% block header_nav %}
-                <ul id="header-nav" class="nav nav-pills pull-right">
-                    {% if app.user %}
-                        <li>
-                            <a type="button" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span>
-                                {{ 'hello_user'|trans({'%firstname%': app.user.firstname}) }}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li>
-                                    <a href="{{ path('fos_user_profile_edit') }}">
-                                        <span class="glyphicon glyphicon-cog"></span>
-                                        {{ 'my_profile'|trans }}
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('fos_user_profile_orders') }}">
-                                        <span class="glyphicon glyphicon-list"></span>
-                                        {{ 'my_sales_orders'|trans }}
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="{{ path('fos_user_security_logout') }}">
-                                        <span class="glyphicon glyphicon-off"></span>
-                                        {{ 'logout'|trans }}
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{{ path('fos_user_profile_edit') }}">
-                                <span class="glyphicon glyphicon-user"></span>
-                                {{ 'my_account'|trans }}
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            {% endblock %}
 
-            {% block header %}
-                <header>
-                    <div id="header-logo">
-                        <a href="{{ path('open_miam_miam.homepage') }}">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
-                    </div>
-                </header>
-            {% endblock %}
-
+        {% block header %}
+            <header>
+                <div id="header-logo">
+                    <a href="{{ path('open_miam_miam.homepage') }}">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
+                </div>
+            </header>
+        {% endblock %}
+        <div class="container content-wrapper">
             {% block global_content %}
                 {% include 'IsicsOpenMiamMiamBundle::messages.html.twig' %}
                 {% block content %}{% endblock %}
@@ -92,7 +50,7 @@
         {% block footer %}
             <footer>
                 <hr />
-                <div class="container">
+                <div class="container footer-container">
                     {% include 'IsicsOpenMiamMiamBundle::copyright.html.twig' %}
                 </div>
             </footer>
