@@ -113,7 +113,7 @@ header {
       padding: 0 0 0 (@grid-gutter-width/2);
 
       strong {
-        font-size: 12px;
+        .font-size(1.2);
       }
     }
   }
@@ -135,8 +135,8 @@ header {
 
     .branch-title {
       @media (max-width: @screen-xs-max) {
+        .font-size(1.2);
         margin: 0;
-        font-size: 12px;
         position: absolute;
         white-space: nowrap;
         text-align: right;
@@ -175,13 +175,7 @@ header {
 }
 
 .navbar-toggle {
-  border-radius: @navbar-button-border-radius;
-  background-color: @navbar-button-bg;
-  border: @navbar-button-border;
-  height: @navbar-button-height;
-  width: @navbar-button-width;
-  color: @navbar-button-color;
-
+  .navbar-btn();
   margin: 5px 5px 5px (@grid-gutter-width/2);
   padding: 8px 8px;
 
@@ -214,18 +208,12 @@ header {
     margin: 5px 0;
 
     .account {
-      border-radius: @navbar-button-border-radius;
-      background-color: @navbar-button-bg;
-      height: @navbar-button-height;
-      width: @navbar-button-width;
-      color: @navbar-button-color;
-      border: @navbar-button-border;
-
+      .navbar-btn();
+      .font-size(2);
       display: block;
       float: right;
       text-align: center;
       padding: 8px;
-      font-size: 20px;
       cursor: pointer;
     }
   }
@@ -285,12 +273,12 @@ header {
   }
 
   > .glyphicon-shopping-cart {
-    font-size: 35px;
+    .font-size(3.5);
     margin-right: 10px;
     float: left;
 
     @media (max-width: @screen-xs-max) {
-      font-size: 28px;
+      .font-size(2.8);
       margin-right: 0;
       float: none;
     }
@@ -298,16 +286,16 @@ header {
 
   .cart-title {
     @media (min-width: @screen-sm-min) {
-      font-size: 18px;
+      .font-size(1.8);
       font-weight: bold;
       color: #000;
     }
   }
 
   .cart-items-number {
+    .font-size(1.1);
     position: absolute;
     font-weight: bold;
-    font-size: 11px;
     color: #FFF;
     left: 12px;
     top: 7px;
@@ -331,8 +319,7 @@ header {
 
   &.has-item {
     @media (max-width: @screen-xs-max) {
-      color: #FFF;
-      background-color: @navbar-cart-bg-witem;
+      .button-variant(@btn-primary-color; @navbar-cart-bg-witem; @btn-primary-border);
     }
 
     .cart-items-number {

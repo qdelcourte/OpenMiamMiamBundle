@@ -1,0 +1,15 @@
+.navbar-btn() {
+  border-radius: @navbar-button-border-radius;
+  background-color: @navbar-button-bg;
+  border: @navbar-button-border;
+  height: @navbar-button-height;
+  width: @navbar-button-width;
+  color: @navbar-button-color;
+}
+
+.font-size(@sizeValue) {
+  @remValue: @sizeValue;
+  @pxValue: (@sizeValue * 10);
+  font-size: ~"@{pxValue}px";
+  font-size: ~"@{remValue}rem";
+}
