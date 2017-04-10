@@ -10,14 +10,14 @@ header {
 #header-nav {
   padding: 0;
   float: right;
-  margin-right: 15px;
+  margin-right: (@grid-gutter-width/2);
   list-style-type: none;
 }
 
 #header-branch-name,
 #header-branch-occurrence,
 #header-cart {
-  padding: 5px 15px;
+  padding: 5px (@grid-gutter-width/2);
 
   h1,
   > strong {
@@ -110,7 +110,7 @@ header {
       order: 1;
       z-index: 1;
       background: @over-header-bg;
-      padding: 0 0 0 15px;
+      padding: 0 0 0 (@grid-gutter-width/2);
 
       strong {
         font-size: 12px;
@@ -130,7 +130,7 @@ header {
       left: 60%;
       order: 2;
       z-index: 1;
-      padding: 0 15px 0 0;
+      padding: 0 (@grid-gutter-width/2) 0 0;
     }
 
     .branch-title {
@@ -182,7 +182,7 @@ header {
   width: @navbar-button-width;
   color: @navbar-button-color;
 
-  margin: 5px 5px 5px 15px;
+  margin: 5px 5px 5px (@grid-gutter-width/2);
   padding: 8px 8px;
 
   .icon-bar {
@@ -234,7 +234,7 @@ header {
 #header-cart {
   @media (max-width: @screen-xs-max) {
     padding: 0 !important;
-    margin: 5px 15px 5px 5px;
+    margin: 5px (@grid-gutter-width/2) 5px 5px;
     order: 5;
   }
 }
@@ -314,7 +314,7 @@ header {
 
     @media (max-width: @screen-xs-max) {
       color: @navbar-cart-inumber-color;
-      left: 15px;
+      left: (@grid-gutter-width/2);
       top: 8px;
     }
   }
