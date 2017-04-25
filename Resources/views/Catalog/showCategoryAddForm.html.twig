@@ -8,21 +8,11 @@
 {% extends 'IsicsOpenMiamMiamBundle:Cart:showAddForm.html.twig' %}
 
 {% block availability %}
-    <td>
-        {% if not cart.closed %}
-            {{ parent() }}
-        {% else %}
-            -
-        {% endif %}
-    </td>
 {% endblock %}
 
 {% block form %}
-    <td>
-        {% if cart.closed or form is defined %}
-            {{ parent() }}
-        {% else %}
-            -
-        {% endif %}
-    </td>
+    {{ parent() }}
+    {% if not cart.closed and (not productAvailability.isAvailable or productAvailability.reason is constant('REASON_IN_STOCK', productAvailability)) %}
+        {{ product_macro.availability_tag(productAvailability) }}
+    {% endif %}
 {% endblock %}
