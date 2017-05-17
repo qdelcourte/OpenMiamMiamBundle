@@ -17,8 +17,6 @@ header {
 #header-branch-name,
 #header-branch-occurrence,
 #header-cart {
-  padding: 5px (@grid-gutter-width/2);
-
   h1,
   > strong {
     margin: 0;
@@ -35,10 +33,64 @@ header {
       color: @gray-light;
     }
   }
+
+  .branch-name-wrapper,
+  .cart-wrapper {
+    @media (min-width: @screen-md-min) {
+      min-height: 75px;
+    }
+  }
 }
 
 #header-branch-name {
   clear: both;
+  padding: 0 0 0 (@grid-gutter-width/2);
+
+  .branch-name-wrapper {
+    padding: 5px (@grid-gutter-width/2);
+
+    @media (min-width: @screen-md-min) {
+      border-top: 1px solid @panel-default-border;
+      border-bottom: 1px solid @panel-default-border;
+      border-left: 1px solid @panel-default-border;
+      border-top-left-radius: @border-radius-base;
+      border-bottom-left-radius: @border-radius-base;
+    }
+
+    small,
+    .branch-title {
+      display: block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
+
+#header-branch-occurrence {
+  padding: 5px (@grid-gutter-width/2);
+
+  @media (min-width: @screen-md-min) {
+    border-top: 1px solid @panel-default-border;
+    border-bottom: 1px solid @panel-default-border;
+    min-height: 75px;
+  }
+}
+
+#header-cart {
+  padding: 0 (@grid-gutter-width/2) 0 0;
+
+  .cart-wrapper {
+    padding: 5px (@grid-gutter-width/2);
+
+    @media (min-width: @screen-md-min) {
+      border-top: 1px solid @panel-default-border;
+      border-right: 1px solid @panel-default-border;
+      border-bottom: 1px solid @panel-default-border;
+      border-top-right-radius: @border-radius-base;
+      border-bottom-right-radius: @border-radius-base;
+    }
+  }
 }
 
 @media screen and (min-width: @screen-sm-min) {
