@@ -44,12 +44,15 @@ header {
 
 #header-branch-name {
   clear: both;
-  padding: 0 0 0 (@grid-gutter-width/2);
+  padding: 5px (@grid-gutter-width/2);
+
+  @media (min-width: @screen-md-min) {
+    padding: 0 0 0 (@grid-gutter-width/2);
+  }
 
   .branch-name-wrapper {
-    padding: 5px (@grid-gutter-width/2);
-
     @media (min-width: @screen-md-min) {
+      padding: 5px (@grid-gutter-width/2);
       border-top: 1px solid @panel-default-border;
       border-bottom: 1px solid @panel-default-border;
       border-left: 1px solid @panel-default-border;
@@ -59,10 +62,12 @@ header {
 
     small,
     .branch-title {
-      display: block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+      @media (min-width: @screen-md-min) {
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
   }
 }
@@ -78,12 +83,15 @@ header {
 }
 
 #header-cart {
-  padding: 0 (@grid-gutter-width/2) 0 0;
+  padding: 5px (@grid-gutter-width/2);
+
+  @media (min-width: @screen-md-min) {
+    padding: 0 0 0 (@grid-gutter-width/2);
+  }
 
   .cart-wrapper {
-    padding: 5px (@grid-gutter-width/2);
-
     @media (min-width: @screen-md-min) {
+      padding: 5px (@grid-gutter-width/2);
       border-top: 1px solid @panel-default-border;
       border-right: 1px solid @panel-default-border;
       border-bottom: 1px solid @panel-default-border;
