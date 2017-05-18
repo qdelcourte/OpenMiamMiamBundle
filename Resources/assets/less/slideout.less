@@ -36,6 +36,15 @@
       opacity: 1;
       z-index: 1000;
       transition: z-index 0s linear 0s;
+
+      &:after {
+        .font-size(2);
+        content: 'X';
+        position: absolute;
+        right: (@grid-gutter-width/2);
+        top:(@grid-gutter-width/2);
+        color: #FFF;
+      }
     }
 
     .slideout-content {

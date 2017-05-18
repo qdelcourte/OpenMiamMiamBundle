@@ -86,7 +86,13 @@ header {
   padding: 5px (@grid-gutter-width/2);
 
   @media (min-width: @screen-md-min) {
-    padding: 0 0 0 (@grid-gutter-width/2);
+    padding: 0 (@grid-gutter-width/2) 0 0;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    padding: 0 !important;
+    margin: 5px (@grid-gutter-width/2) 5px 5px;
+    order: 5;
   }
 
   .cart-wrapper {
@@ -276,14 +282,6 @@ header {
       padding: 8px;
       cursor: pointer;
     }
-  }
-}
-
-#header-cart {
-  @media (max-width: @screen-xs-max) {
-    padding: 0 !important;
-    margin: 5px (@grid-gutter-width/2) 5px 5px;
-    order: 5;
   }
 }
 
