@@ -33,12 +33,13 @@
     <div class="branch-occurrence-wrapper">
         {% if nextBranchOccurrence is not null %}
             <strong>{{ 'zone.occurrence.title'|trans }}</strong>
-            <a href="#" id="header-branch-occurrence-date">
+            <a href="#" class="branch-occurrence-date">
                 {{ nextBranchOccurrence.begin|format_date('eee dd MMMM')|capitalize }}
                 {{ nextBranchOccurrence.begin|format_time('HH:mm') }}&nbsp;-&nbsp;{{ nextBranchOccurrence.end|format_time('HH:mm') }}
             </a>
             {% if openingDateTime is null and closingDateTime is not null %}
                 <div class="branch-occurrence-order-before">
+                    <i class="glyphicon glyphicon-time"></i>
                     {{ 'zone.occurrence.order.before'|trans }}
                     {{ closingDateTime|format_datetime('dd/MM') }}&nbsp;{{ closingDateTime|format_datetime('HH:mm') }}
                 </div>
@@ -54,7 +55,5 @@
 </div>
 
 <div id="header-cart" class="col-md-3 col-sm-3">
-    <div class="cart-wrapper">
-        {% include 'IsicsOpenMiamMiamBundle:Cart:headerCart.html.twig' %}
-    </div>
+    {% include 'IsicsOpenMiamMiamBundle:Cart:headerCart.html.twig' %}
 </div>
