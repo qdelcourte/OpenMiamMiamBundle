@@ -286,7 +286,13 @@ header {
     // Phone version
     @media (max-width: @screen-xs-max) {
 
+        margin-left: -@grid-gutter-width/2;
+        margin-right: -@grid-gutter-width/2;
+
         > div {
+            margin-left: 0;
+            margin-right: 0;
+
             position: relative;
             border-bottom: 1px solid @table-border-color;
             &:last-child {
