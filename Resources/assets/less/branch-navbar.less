@@ -139,7 +139,6 @@ header {
 .page-branch {
   .navbar {
     border: 0;
-    margin: 0;
 
     @media (max-width: @screen-xs-max) {
       margin-top: 0;
@@ -184,7 +183,7 @@ header {
       padding: 0 0 0 (@grid-gutter-width/2);
 
       strong {
-        .font-size(1.2);
+        font-size: @font-size-small;
       }
     }
   }
@@ -206,7 +205,7 @@ header {
 
     .branch-title {
       @media (max-width: @screen-xs-max) {
-        .font-size(1.2);
+        font-size: @font-size-small;
         margin: 0;
         position: absolute;
         white-space: nowrap;
@@ -248,11 +247,9 @@ header {
 .navbar-toggle {
   .navbar-btn();
   margin: 5px 5px 5px (@grid-gutter-width/2);
-  padding: 8px 8px;
+  padding: 8px;
 
   .icon-bar {
-    height: 3px;
-    width: 24px;
     background-color: @navbar-button-color;
   }
 
@@ -280,7 +277,7 @@ header {
 
     .account {
       .navbar-btn();
-      .font-size(2);
+      font-size: @font-size-large;
       display: block;
       float: right;
       text-align: center;
@@ -316,7 +313,7 @@ header {
 
 .cart-title {
   @media (min-width: @screen-sm-min) {
-    .font-size(1.8);
+    font-size: @font-size-large;
     display: block;
     font-weight: bold;
     color: #000;
@@ -345,19 +342,19 @@ header {
   }
 
   > .glyphicon-shopping-cart {
-    .font-size(3.5);
+    font-size: 35px;
     margin-right: 10px;
     float: left;
 
     @media (max-width: @screen-xs-max) {
-      .font-size(2.8);
+      font-size: 28px;
       margin-right: 0;
       float: none;
     }
   }
 
   .cart-items-number {
-    .font-size(1.1);
+    font-size: @font-size-small;
     position: absolute;
     font-weight: bold;
     color: #FFF;
