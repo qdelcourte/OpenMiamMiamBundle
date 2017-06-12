@@ -1,4 +1,11 @@
-<div class="cart-wrapper">
+{#
+ # This file is part of the OpenMiamMiam project.
+ # (c) Isics <contact@isics.fr>
+ #
+ # This source file is subject to the AGPL v3 license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+ <div class="cart-wrapper">
     {% if not cart.isClosed %}
         {% if cart.nbItems > 0 %}
             <strong class="cart-title desktop-only">{{ 'cart.title'|trans }}</strong>
