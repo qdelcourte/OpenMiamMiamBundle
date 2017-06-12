@@ -144,11 +144,20 @@ header {
 
         a {
             .glyphicon {
-                float: right;
+                float: left;
+                margin-right: 5px;
+            }
+
+            &:not(.collapsed) .glyphicon {
+                &:before { content: "\e082"; } // = .glyphicon-minus-sign
+            }
+
+            &.collapsed .glyphicon {
+                &:before { content: "\e081"; } // = .glyphicon-plus-sign
             }
 
             display: block;
-            padding: 10px 15px;
+            padding: 10px;
 
             &:hover,
             &:focus,
@@ -157,6 +166,8 @@ header {
                 border-color: darken(@panel-default-border, 12%);
                 text-decoration: none;
             }
+
+
         }
     }
 
