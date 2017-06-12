@@ -44,7 +44,7 @@ header {
 
 #header-branch-name {
   clear: both;
-  padding: 5px (@grid-gutter-width/2);
+  padding: @padding-small-vertical (@grid-gutter-width/2);
 
   @media (min-width: @screen-md-min) {
     padding: 0 0 0 (@grid-gutter-width/2);
@@ -52,7 +52,7 @@ header {
 
   .branch-name-wrapper {
     @media (min-width: @screen-md-min) {
-      padding: 5px (@grid-gutter-width/2);
+      padding: @padding-small-vertical (@grid-gutter-width/2);
       border-top: 1px solid @panel-default-border;
       border-bottom: 1px solid @panel-default-border;
       border-left: 1px solid @panel-default-border;
@@ -73,7 +73,7 @@ header {
 }
 
 #header-branch-occurrence {
-  padding: 5px (@grid-gutter-width/2);
+  padding: @padding-small-vertical (@grid-gutter-width/2);
 
   @media (min-width: @screen-md-min) {
     border-top: 1px solid @panel-default-border;
@@ -83,7 +83,7 @@ header {
 }
 
 #header-cart {
-  padding: 5px (@grid-gutter-width/2);
+  padding: @padding-small-vertical (@grid-gutter-width/2);
 
   @media (min-width: @screen-md-min) {
     padding: 0 (@grid-gutter-width/2) 0 0;
@@ -97,7 +97,7 @@ header {
 
   .cart-wrapper {
     @media (min-width: @screen-md-min) {
-      padding: 5px (@grid-gutter-width/2);
+      padding: @padding-small-vertical (@grid-gutter-width/2);
       border-top: 1px solid @panel-default-border;
       border-right: 1px solid @panel-default-border;
       border-bottom: 1px solid @panel-default-border;
@@ -246,8 +246,8 @@ header {
 
 .navbar-toggle {
   .navbar-btn();
+  line-height: @navbar-button-height;
   margin: 5px 5px 5px (@grid-gutter-width/2);
-  padding: 8px;
 
   .icon-bar {
     background-color: @navbar-button-color;
@@ -277,11 +277,11 @@ header {
 
     .account {
       .navbar-btn();
+      line-height: @navbar-button-height;
       font-size: @font-size-large;
       display: block;
       float: right;
       text-align: center;
-      padding: 8px;
       cursor: pointer;
     }
   }
@@ -332,7 +332,7 @@ header {
     border: @navbar-button-border;
     height: @navbar-button-height;
     text-align: center;
-    padding: 4px 5px;
+    padding: @padding-small-vertical;
     display: block;
   }
 
