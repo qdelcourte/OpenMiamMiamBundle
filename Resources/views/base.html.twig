@@ -34,9 +34,13 @@
     <body{% block body_attributes %}{% endblock %}>
 
         {% block header %}
-            <header>
-                <div id="header-logo">
-                    <a href="{{ path('open_miam_miam.homepage') }}">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
+            <header class="navbar navbar-static-top">
+                <div class="container header-container">
+                    <div class="row">
+                        <div id="header-logo">
+                            <a href="{{ path('open_miam_miam.homepage') }}">{% include 'IsicsOpenMiamMiamBundle::baseLogo.html.twig' %}</a>
+                        </div>  
+                    </div>
                 </div>
             </header>
         {% endblock %}
