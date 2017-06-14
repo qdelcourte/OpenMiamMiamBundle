@@ -1,55 +1,55 @@
 #slideout {
-  .slideout-overlay {
-    transition: opacity @transition-time ease, z-index 0s linear @transition-time;
-
-    @media (max-width: @screen-sm-max) {
-      position: fixed;
-      opacity: 0;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: -1;
-      height: 100vh;
-      display: block;
-      background-color: fade(#000, 70%);
-    }
-  }
-
-  .slideout-content {
-    transition: transform @transition-time ease;
-
-    @media (max-width: @screen-sm-max) {
-      position: fixed;
-      overflow-y: auto;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      transform: translateX(-100%);
-      background: @slideout-bg;
-      padding: 15px;
-      z-index: 1001;
-    }
-  }
-
-  &.open {
     .slideout-overlay {
-      opacity: 1;
-      z-index: 1000;
-      transition: z-index 0s linear 0s;
+        transition: opacity @transition-time ease, z-index 0s linear @transition-time;
 
-      &:before {
-        font-size: 30px;
-        content: '\00d7';
-        position: absolute;
-        right: (@grid-gutter-width/2);
-        cursor: pointer;
-        color: #FFF;
-        top: 0;
-      }
+        @media (max-width: @screen-sm-max) {
+            position: fixed;
+            opacity: 0;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: -1;
+            height: 100vh;
+            display: block;
+            background-color: fade(#000, 70%);
+        }
     }
 
     .slideout-content {
-      transform: translateX(0);
+        transition: transform @transition-time ease;
+
+        @media (max-width: @screen-sm-max) {
+            position: fixed;
+            overflow-y: auto;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            transform: translateX(-100%);
+            background: @slideout-bg;
+            padding: 15px;
+            z-index: 1001;
+        }
     }
-  }
+
+    &.open {
+        .slideout-overlay {
+            opacity: 1;
+            z-index: 1000;
+            transition: z-index 0s linear 0s;
+
+            &:before {
+                font-size: 30px;
+                content: '\00d7';
+                position: absolute;
+                right: (@grid-gutter-width/2);
+                cursor: pointer;
+                color: #FFF;
+                top: 0;
+            }
+        }
+
+        .slideout-content {
+            transform: translateX(0);
+        }
+    }
 }
