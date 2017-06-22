@@ -265,3 +265,44 @@ OpenMiamMiam.AccordionFocus = function() {
 
     return object;
 }();
+
+OpenMiamMiam.Slideout = function() {
+
+    var object = function (button) {
+        console.log('init');
+        var that = this;
+        that.button = button;
+        that.slideout = $(that.button.attr('data-target'));
+        that.overlay = that.slideout.children('.slideout-overlay');
+
+        that.button.click(function (e) {
+            e.preventDefault();
+            that.toggle();
+        });
+
+        that.overlay.click(function (e) {
+            e.preventDefault();
+            that.close();
+        });
+    };
+
+    object.prototype = {
+        open: function() {
+            this.button.addClass('open');
+            this.slideout.addClass('open');
+        },
+        close: function() {
+            this.button.removeClass('open');
+            this.slideout.removeClass('open');
+        },
+        toggle: function() {
+            if (this.button.hasClass('open')) {
+                this.close();
+            } else {
+                this.open();
+            }
+        }
+    };
+
+    return object;
+}();

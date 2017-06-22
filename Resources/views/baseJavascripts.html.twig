@@ -6,17 +6,27 @@
  # with this source code in the file LICENSE.
  #}
 {% javascripts
-    'js/jquery-1.10.2.min.js'
-    'js/jquery-ui-1.10.3.custom.min.js'
-    'bootstrap/js/button.js'
-    'bootstrap/js/collapse.js'
-    'bootstrap/js/transition.js'
-    'bootstrap/js/dropdown.js'
-    '@IsicsOpenMiamMiamBundle/Resources/assets/js/common.js'
-    '@IsicsOpenMiamMiamBundle/Resources/assets/js/front.js'
-    '@IsicsOpenMiamMiamBundle/Resources/assets/js/slideout.js'
-    filter='?uglifyjs2'
-    output='cache/js/*.js'
+'js/jquery-1.10.2.min.js'
+'js/jquery-ui-1.10.3.custom.min.js'
+'bootstrap/js/button.js'
+'bootstrap/js/collapse.js'
+'bootstrap/js/transition.js'
+'bootstrap/js/dropdown.js'
+'@IsicsOpenMiamMiamBundle/Resources/assets/js/common.js'
+'@IsicsOpenMiamMiamBundle/Resources/assets/js/front.js'
+filter='?uglifyjs2'
+output='cache/js/*.js'
 %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+<script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
+
+<script type="text/javascript">
+    (function ($) {
+        $(function() {
+            $('button.navbar-toggle').each(function () {
+                new OpenMiamMiam.Slideout($(this));
+            });
+        });
+    })(jQuery);
+</script>
+
