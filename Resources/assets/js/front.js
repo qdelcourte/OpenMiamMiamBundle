@@ -269,7 +269,6 @@ OpenMiamMiam.AccordionFocus = function() {
 OpenMiamMiam.Slideout = function() {
 
     var object = function (button) {
-        console.log('init');
         var that = this;
         that.button = button;
         that.slideout = $(that.button.attr('data-target'));
