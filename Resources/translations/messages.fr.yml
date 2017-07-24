@@ -125,7 +125,7 @@ order.confirm.read_agree:                  "J'ai lu et j'accepte les"
 order.confirm.terms_of_service:            "Conditions Générales d'Utilisation."
 order.confirm.error.terms_of_service:      "Vous devez accepter les Conditions Générales d'Utilisation."
 order.confirmed.body_html:                 |
-    <p>Féliciations %firstname% !</p>
+    <p>Félicitations %firstname% !</p>
     <p>La commande <strong>%ref%</strong> est bien enregistrée.</p>
     <p>
       <strong>N'oubliez pas de venir la chercher %occurrence_date%.</strong><br>
