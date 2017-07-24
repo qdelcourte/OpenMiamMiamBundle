@@ -111,9 +111,20 @@ order.confirm.read_agree:                  "I've read and accept"
 order.confirm.terms_of_service:            "terms of use"
 order.confirm.error.terms_of_service:      "You must accept terms of use"
 order.confirmed.body_html:                 |
-    <p>Congratulations %firstname% !</p>
+    <p>Congratulations %firstname%!</p>
     <p>Order <strong>%ref%</strong> has been registered.</p>
-    <p>An email that contains a summary was sent to you.</p>
+    <p>
+      <strong>Don't forget pick it up on %occurrence_date%.</strong><br>
+      Payment will be made directly on site!
+    </p>
+    <p>
+      An email that contains a summary was sent to you.<br>
+      You can also find your order in <strong><a href="%orders_url%">your account</a></strong> <em>(top right menu)</em>.
+    </p>
+    <p>&nbsp;<p>
+    <p>
+      For any questions about your order, do not hesitate to contact us!
+    </p>
 
 # Attendance
 attendance.yes:     "Yes"
