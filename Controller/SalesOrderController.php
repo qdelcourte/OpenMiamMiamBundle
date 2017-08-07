@@ -59,15 +59,18 @@ class SalesOrderController extends Controller
             )
             ->getForm();
 
+        $branchOccurrenceManager = $this->get('open_miam_miam.branch_occurrence_manager');
+        $branchOccurrence = $branchOccurrenceManager->getNext($branch);
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $branchOccurrenceManager = $this->get('open_miam_miam.branch_occurrence_manager');
+
                 $orderManager = $this->get('open_miam_miam.sales_order_manager');
 
                 $order = $orderManager->processSalesOrderFromCart(
                     $cart,
-                    $branchOccurrenceManager->getNext($branch),
+                    $branchOccurrence,
                     $user,
                     $form->getData()
                 );
@@ -85,10 +88,11 @@ class SalesOrderController extends Controller
         }
 
         return $this->render('IsicsOpenMiamMiamBundle:SalesOrder:confirm.html.twig', array(
-            'branch' => $branch,
-            'cart'   => $cart,
-            'user'   => $user,
-            'form'   => $form->createView()
+            'branch'           => $branch,
+            'branchOccurrence' => $branchOccurrence,
+            'cart'             => $cart,
+            'user'             => $user,
+            'form'             => $form->createView()
         ));
     }
 
