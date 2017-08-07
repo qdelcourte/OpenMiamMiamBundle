@@ -1034,6 +1034,7 @@ mail.branch.orders_open.message_html:    |
     <p>Les commandes pour le lieu de distribution <a href="%branch_url%">%branch_name%</a> sont ouvertes <strong>du %order_open_date% au %order_closed_date%</strong>.</p>
     <p><strong>Rendez-vous sur <a href="%branch_url%">%branch_url%</a> pour commander !</strong></p>
 mail.branch.orders_open.unsubscribe:     |
+    <p>&nbsp;</p>
     <p style="font-size: 0.8em;">
         <em >
             Vous pouvez modifier vos préférences d'alertes e-mail dans

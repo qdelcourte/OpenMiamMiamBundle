@@ -281,6 +281,7 @@ admin.super.producers.delete_dialog.content:  "Are your sure to want to delete t
 
 
 newsletter.unsubscribe:     |
+    <p>&nbsp;</p>
     <p style="font-size: 0.8em;">
         <em>
             You can modify your email alert preferences in
