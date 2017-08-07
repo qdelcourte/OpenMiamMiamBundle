@@ -959,6 +959,7 @@ mail.branch.orders_open.subject:         "Branch %branch_name% is opened!"
 mail.branch.orders_open.message_html:    |
     <p>Hello %firstname%,</p>
     <p>Branch <a href="%branch_url%">%branch_name%</a> is opened <strong>from %order_open_date% to %order_closed_date%</strong>.</p>
+    <p>The next occurence will take place on <strong>%next_occurence_date%</strong>.</p>
     <p><strong>Go to <a href="%branch_url%">%branch_url%</a> to purchase!</strong></p>
 mail.branch.orders_open.unsubscribe:     |
     <p style="font-size: 0.8em;">
@@ -974,6 +975,7 @@ mail.branch.orders_closed.subject:         "Don't forget your sale %ref% for bra
 mail.branch.orders_closed.message_html:    |
     <p>Hello %firstname%,</p>
     <p><strong>Don't forget your sales order %ref%!</strong></p>
+    <p>The next occurence will take place on <strong>%next_occurence_date%</strong>.</p>
 
 # Excel
 excel.association.producer.transfer.filename:                                   "bank-transfers-%year%-%month%.xlsx"
