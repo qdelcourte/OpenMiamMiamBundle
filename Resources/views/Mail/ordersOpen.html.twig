@@ -15,12 +15,9 @@
         '%branch_zipcode%': branchOccurrence.branch.zipcode,
         '%branch_address%': branchOccurrence.branch.address1,
         '%occurrence_date_begin%': branchOccurrence.begin|format_date("eeee dd MMMM")|capitalize,
-        '%occurrence_date_begin_hours%': branchOccurrence.begin|format_date("HH"),
-        '%occurrence_date_begin_minutes%': branchOccurrence.begin|format_date("mm"),
-        '%occurrence_date_end_hours%': branchOccurrence.end|format_date("HH"),
-        '%occurrence_date_end_minutes%': branchOccurrence.end|format_date("mm"),
-        '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH"),
-        '%order_closed_date_minutes%': ordersClosingDateTime|format_datetime("mm")
+        '%occurrence_date_begin_hours%': branchOccurrence.begin|format_date("HH:mm"),
+        '%occurrence_date_end_hours%': branchOccurrence.end|format_date("HH:mm"),
+        '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH:mm")
     })|raw }}
 
     {{ 'mail.branch.orders_open.unsubscribe'|trans({

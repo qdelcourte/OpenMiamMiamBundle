@@ -960,9 +960,9 @@ mail.branch.orders_open.message_html:    |
     <p>Hello %firstname%,</p>
     <p>
         The next occurence of %branch_city% is planned on :
-        <br/><strong>%occurrence_date_begin% <br/> from %occurrence_date_begin_hours%:%occurrence_date_begin_minutes% to %occurrence_date_end_hours%:%occurrence_date_end_minutes%</strong>
+        <br/><strong>%occurrence_date_begin% <br/> from %occurrence_date_begin_hours% to %occurrence_date_end_hours%</strong>
     </p>
-    <p>The orders are opened until <strong>%order_closed_date%:%order_closed_date_minutes%</strong>.</p>
+    <p>The orders are opened until <strong>%order_closed_date%</strong>.</p>
     <p><strong>Go to <a href="%branch_url%">%branch_url%</a> to purchase!</strong></p>
     <p>
         Branch address : <br/>
@@ -984,7 +984,7 @@ mail.branch.orders_closed.subject:         "Don't forget your sale %ref% for bra
 mail.branch.orders_closed.message_html:    |
     <p>Hello %firstname%,</p>
     <p><strong>Don't forget your sales order %ref%!</strong></p>
-    <p>The next occurence will take place on <strong>%occurrence_date% from %occurrence_date_begin_hours%:%occurrence_date_begin_minutes% to %occurrence_date_end_hours%:%occurrence_date_end_minutes%</strong>.</p>
+    <p>The next occurence will take place on <strong>%occurrence_date% from %occurrence_date_begin_hours% to %occurrence_date_end_hours%</strong>.</p>
 
 # Excel
 excel.association.producer.transfer.filename:                                   "bank-transfers-%year%-%month%.xlsx"
