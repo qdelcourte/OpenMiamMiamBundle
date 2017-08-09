@@ -1020,16 +1020,17 @@ mail.branch.orders_open.log.task_end:    "<info>%email_sent%</info> email(s) env
 mail.branch.orders_open.subject:         "Les commandes sont ouvertes pour le lieu de distribution %branch_name% !"
 mail.branch.orders_open.message_html:    |
     <p>Bonjour %firstname%,</p>
-    <p>La prochaine distribution de %branch_city% est prévue le : <br/><strong>%occurrence_date%</strong></p>
-    <p>Les commandes sont ouvertes jusqu'au <strong>%order_closed_date%</strong>.</p>
+    <p>
+        La prochaine distribution de %branch_city% est prévue le :
+        <br/><strong>%occurrence_date_begin% <br/> de %occurrence_date_begin_hours%h%occurrence_date_begin_minutes% à %occurrence_date_end_hours%h%occurrence_date_end_minutes%</strong>
+    </p>
+    <p>Les commandes sont ouvertes jusqu'au <strong>%order_closed_date%h%order_closed_date_minutes%</strong>.</p>
     <p><strong>Rendez-vous sur <a href="%branch_url%">%branch_url%</a> pour commander !</strong></p>
     <p>
-        <div>
         Lieu de distribution : <br/>
         %association_name% <br/>
         %branch_address% <br/>
         %branch_zipcode% %branch_city%
-        </div>
     </p>
 mail.branch.orders_open.unsubscribe:     |
     <p style="font-size: 0.8em;">
@@ -1045,7 +1046,7 @@ mail.branch.orders_closed.subject:         "N'oubliez pas votre commande %ref% p
 mail.branch.orders_closed.message_html:    |
     <p>Bonjour %firstname%,</p>
     <p><strong>N'oubliez pas de venir chercher votre commande %ref% !</strong></p>
-    <p>La prochaine distribution aura lieu le <strong>%occurrence_date%</strong>.</p>
+    <p>La prochaine distribution aura lieu le <strong>%occurrence_date% de %occurrence_date_begin_hours%h%occurrence_date_begin_minutes% à %occurrence_date_end_hours%h%occurrence_date_end_minutes%</strong>.</p>
 
 # Excel
 excel.association.producer.transfer.filename:                                   "virements-producteurs-%month%-%year%.xlsx"
