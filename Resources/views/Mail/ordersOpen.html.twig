@@ -14,9 +14,9 @@
         '%association_name%': branchOccurrence.branch.association.name,
         '%branch_zipcode%': branchOccurrence.branch.zipcode,
         '%branch_address%': branchOccurrence.branch.address1,
-        '%occurrence_date_begin%': branchOccurrence.begin|format_date("eeee dd MMMM")|capitalize,
-        '%occurrence_date_begin_hours%': branchOccurrence.begin|format_date("HH:mm"),
-        '%occurrence_date_end_hours%': branchOccurrence.end|format_date("HH:mm"),
+        '%occurrence_begin_date%': branchOccurrence.begin|format_date("eeee dd MMMM")|capitalize,
+        '%occurrence_begin_time%': branchOccurrence.begin|format_date("HH:mm"),
+        '%occurrence_end_time%': branchOccurrence.end|format_date("HH:mm"),
         '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH:mm")
     })|raw }}
 
