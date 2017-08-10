@@ -110,7 +110,7 @@ cart.unable_to_update:      "Impossible de mettre à jour le panier !"
 order.process.stage1:                      "Mon panier"
 order.process.stage2:                      "Vérification"
 order.process.stage3:                      "Commande enregistrée !"
-order.confirm.title:                       "Vérifiez votre commande"
+order.confirm.title:                       "Confirmez votre commande :"
 order.confirm.consumer.title:              "Consommateur"
 order.confirm.consumer.no_phone_statement: "Téléphone non renseigné"
 order.confirm.consumer.update:             "Mettre à jour mes coordonnées"
@@ -120,14 +120,25 @@ order.confirm.cart.title:                  "Votre commande"
 order.confirm.cart.update:                 "Modifier ma commande"
 order.confirm.submit:                      "Je confirme ma commande"
 order.confirm.consumer_comment:            "N'hésitez pas à nous laisser un commentaire :"
-order.confirmed.title:                     "Votre commande a été enregistrée !"
+order.confirmed.title:                     "Votre commande est enregistrée !"
 order.confirm.read_agree:                  "J'ai lu et j'accepte les"
 order.confirm.terms_of_service:            "Conditions Générales d'Utilisation."
 order.confirm.error.terms_of_service:      "Vous devez accepter les Conditions Générales d'Utilisation."
 order.confirmed.body_html:                 |
-    <p>Féliciations %firstname% !</p>
-    <p>La commande <strong>%ref%</strong> a bien été enregistrée.</p>
-    <p>Un e-mail récapitulatif vous a été envoyé.</p>
+    <p>Félicitations %firstname% !</p>
+    <p>La commande <strong>%ref%</strong> est bien enregistrée.</p>
+    <p>
+      <strong>N'oubliez pas de venir la chercher %occurrence_date%.</strong><br>
+      Le règlement se fera directement sur place !
+    </p>
+    <p>
+      Un e-mail récapitulatif vous a été envoyé.<br>
+      Vous pouvez également retrouver cette commande dans <strong><a href="%orders_url%">votre compte</a></strong> <em>(menu en haut à droite)</em>.
+    </p>
+    <p>&nbsp;<p>
+    <p>
+      Si vous avez des questions au sujet de votre commande, n'hésitez pas à nous contacter !
+    </p>
 
 
 # Attendance
