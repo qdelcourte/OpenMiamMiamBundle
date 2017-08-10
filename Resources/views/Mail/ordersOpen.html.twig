@@ -19,13 +19,15 @@
         '%occurrence_end_time%': branchOccurrence.end|format_date("HH:mm"),
         '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH:mm")
     })|raw }}
-
-    {{ 'mail.branch.orders_open.unsubscribe'|trans({
-        '%url%': url('fos_user_profile_edit')
-    })|raw }}
 {% endblock %}
 
 {% block signature %}
     <hr />
     {{ branchOccurrence.branch.association.getName() }}
+{% endblock %}
+
+{% block unsubscribe %}
+    {{ 'newsletter.unsubscribe'|trans({
+        '%url%': url('fos_user_profile_edit')
+    })|raw }}
 {% endblock %}

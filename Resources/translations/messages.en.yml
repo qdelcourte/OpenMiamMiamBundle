@@ -971,13 +971,6 @@ mail.branch.orders_open.message_html:    |
         %branch_address%<br>
         %branch_zipcode% %branch_city%
     </p>
-mail.branch.orders_open.unsubscribe:     |
-    <p style="font-size: 0.8em;">
-        <em >
-            You are able to modify your alert preferences here:
-            <a href="%url%">My profile</a>.
-        </em>
-    </p>
 
 mail.branch.orders_closed.log.branch_name: "<info>Branch \"%branch_name%\" is closed. Emails sent at :</info>"
 mail.branch.orders_closed.log.task_end:    "<info>%email_sent%</info> email(s) sent in <info>%time%</info> seconds. Memory : <info>%memory%</info> Mo"

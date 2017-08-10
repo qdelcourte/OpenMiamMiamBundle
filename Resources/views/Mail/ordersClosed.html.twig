@@ -25,3 +25,9 @@
     <hr />
     {{ branchOccurrence.branch.association.getName() }}
 {% endblock %}
+
+{% block unsubscribe %}
+    {{ 'newsletter.unsubscribe'|trans({
+        '%url%': url('fos_user_profile_edit')
+    })|raw }}
+{% endblock %}
