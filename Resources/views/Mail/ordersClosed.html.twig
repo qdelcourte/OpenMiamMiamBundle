@@ -13,6 +13,9 @@
         '%ref%': salesOrder.ref,
         '%branch_name%': branchOccurrence.branch.name,
         '%branch_url%': url('open_miam_miam.branch.homepage', {'branchSlug': branchOccurrence.branch.slug}),
+        '%occurrence_begin_date%': branchOccurrence.begin|format_date("eeee dd MMMM")|capitalize,
+        '%occurrence_begin_time%': branchOccurrence.begin|format_date("HH:mm"),
+        '%occurrence_end_time%': branchOccurrence.end|format_date("HH:mm"),
     })|raw }}
 
     {% include 'IsicsOpenMiamMiamBundle:Mail:customerSalesOrder.html.twig' with {'order': salesOrder} %}

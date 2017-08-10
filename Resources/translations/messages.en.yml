@@ -970,8 +970,19 @@ mail.branch.orders_open.log.task_end:    "<info>%email_sent%</info> email(s) sen
 mail.branch.orders_open.subject:         "Branch %branch_name% is opened!"
 mail.branch.orders_open.message_html:    |
     <p>Hello %firstname%,</p>
-    <p>Branch <a href="%branch_url%">%branch_name%</a> is opened <strong>from %order_open_date% to %order_closed_date%</strong>.</p>
+    <p>
+        The occurrence of %branch_city% is planned on:<br>
+        <strong>%occurrence_begin_date%<br>
+        from %occurrence_begin_time% to %occurrence_end_time%</strong>
+    </p>
+    <p>The orders are opened until <strong>%order_closed_date%</strong>.</p>
     <p><strong>Go to <a href="%branch_url%">%branch_url%</a> to purchase!</strong></p>
+    <p>
+        Branch address:<br>
+        %association_name%<br>
+        %branch_address%<br>
+        %branch_zipcode% %branch_city%
+    </p>
 mail.branch.orders_open.unsubscribe:     |
     <p style="font-size: 0.8em;">
         <em >
@@ -986,6 +997,7 @@ mail.branch.orders_closed.subject:         "Don't forget your sale %ref% for bra
 mail.branch.orders_closed.message_html:    |
     <p>Hello %firstname%,</p>
     <p><strong>Don't forget your sales order %ref%!</strong></p>
+    <p>The occurrence will take place on <strong>%occurrence_date% from %occurrence_begin_time% to %occurrence_end_time%</strong>.</p>
 
 # Excel
 excel.association.producer.transfer.filename:                                   "bank-transfers-%year%-%month%.xlsx"
