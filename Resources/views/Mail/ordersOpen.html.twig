@@ -10,6 +10,8 @@
 {% block content %}
     {{ 'mail.branch.orders_open.message_html'|trans({
         '%firstname%': format_identity(customer.lastname, customer.firstname, '%firstname%'),
+        '%branch_name%': branchOccurrence.branch.name,
+        '%branch_url%': url('open_miam_miam.branch.homepage', {'branchSlug': branchOccurrence.branch.slug}),
         '%branch_city%': branchOccurrence.branch.city,
         '%association_name%': branchOccurrence.branch.association.name,
         '%branch_zipcode%': branchOccurrence.branch.zipcode,
@@ -17,11 +19,8 @@
         '%occurrence_begin_date%': branchOccurrence.begin|format_date("eeee dd MMMM")|capitalize,
         '%occurrence_begin_time%': branchOccurrence.begin|format_date("HH:mm"),
         '%occurrence_end_time%': branchOccurrence.end|format_date("HH:mm"),
-        '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH:mm")
-    })|raw }}
-
-    {{ 'mail.branch.orders_open.unsubscribe'|trans({
-        '%url%': url('fos_user_profile_edit')
+        '%order_closed_date%': ordersClosingDateTime|format_datetime("eeee dd MMMM Y HH:mm"),
+        '%order_open_date%': ordersOpeningDateTime|format_datetime("eeee dd MMMM Y HH:mm")
     })|raw }}
 {% endblock %}
 

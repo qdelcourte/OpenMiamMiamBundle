@@ -1044,14 +1044,6 @@ mail.branch.orders_open.message_html:    |
         %branch_address%<br>
         %branch_zipcode% %branch_city%
     </p>
-mail.branch.orders_open.unsubscribe:     |
-    <p>&nbsp;</p>
-    <p style="font-size: 0.8em;">
-        <em >
-            Vous pouvez modifier vos préférences d'alertes e-mail dans
-            <a href="%url%">votre profil</a>.
-        </em>
-    </p>
 
 mail.branch.orders_closed.log.branch_name: "<info>Les commandes pour le lieu de distribution \"%branch_name%\" sont fermées. Email de rappel de commande envoyé à :</info>"
 mail.branch.orders_closed.log.task_end:    "<info>%email_sent%</info> email(s) envoyé(s) en <info>%time%</info> secondes. Consommation mémoire : <info>%memory%</info> Mo"
