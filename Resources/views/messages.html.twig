@@ -4,6 +4,12 @@
     </div>
 {% endfor %}
 
+{% for message in app.session.flashbag.get('warning') %}
+    <div class="alert alert-warning">
+        {{ message|trans }}
+    </div>
+{% endfor %}
+
 {% for message in app.session.flashbag.get('error') %}
     <div class="alert alert-danger">
         {{ message|trans }}
