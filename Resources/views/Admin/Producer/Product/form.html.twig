@@ -110,7 +110,7 @@
                     <div class="form-group">
                         {{ form_label(form.imageFile, 'admin.producer.products.form.image'|trans) }}
                         {% if product.image is not null %}
-                            <p><img src="{{ asset(get_image_product_path(product))|imagine_filter('s') }}" alt="{{ product.name }}" /></p>
+                            <p><img src="{{ get_image_product_path(product)|imagine_filter('s') }}" alt="{{ product.name }}" /></p>
                             {{ form_row(form.deleteImage, {'label': 'admin.producer.products.form.delete_image'|trans}) }}
                         {% endif %}
                         {{ form_errors(form.imageFile) }}

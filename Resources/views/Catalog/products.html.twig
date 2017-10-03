@@ -22,9 +22,9 @@
         <tr>
             <td>
                 {% if product.image is not null %}
-                    <img src="{{ asset(get_image_product_path(product))|imagine_filter('s') }}" alt="{{ product.name }}" />
+                    <img src="{{ get_image_product_path(product)|imagine_filter('s') }}" alt="{{ product.name }}" />
                 {% else %}
-                    <img src="{{ asset('bundles/isicsopenmiammiam/img/picture_placeholder.png')|imagine_filter('s') }}" alt="{{ product.name }}" />
+                    <img src="{{ 'bundles/isicsopenmiammiam/img/picture_placeholder.png'|imagine_filter('s') }}" alt="{{ product.name }}" />
                 {% endif %}
             </td>
             <td>
