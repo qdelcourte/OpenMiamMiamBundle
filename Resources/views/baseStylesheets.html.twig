@@ -11,5 +11,5 @@
     filter='?uglifycss'
     output='cache/css/*.css'
 %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    <link rel="stylesheet" href="{{ asset(asset_url) }}" />
 {% endstylesheets %}

@@ -54,7 +54,7 @@
             <div class="col-md-6">
                 {{ form_label(form.profileImageFile, 'admin.producer.infos.profile_image'|trans) }}
                 {% if producer.profileImage is not null %}
-                    <p><img src="{{ asset(get_producer_profile_image_path(producer))|imagine_filter('s') }}" alt="{{ producer.name }}" /></p>
+                    <p><img src="{{ get_producer_profile_image_path(producer)|imagine_filter('s') }}" alt="{{ producer.name }}" /></p>
                     {{ form_row(form.deleteProfileImage, {'label': 'admin.producer.infos.delete_image'|trans}) }}
                 {% endif %}
                 {{ form_errors(form.profileImageFile) }}
@@ -63,7 +63,7 @@
             <div class="col-md-6">
                 {{ form_label(form.presentationImageFile, 'admin.producer.infos.presentation_image'|trans) }}
                 {% if producer.presentationImage is not null %}
-                    <p><img src="{{ asset(get_producer_presentation_image_path(producer))|imagine_filter('s') }}" alt="{{ producer.name }}" /></p>
+                    <p><img src="{{ get_producer_presentation_image_path(producer)|imagine_filter('s') }}" alt="{{ producer.name }}" /></p>
                     {{ form_row(form.deletePresentationImage, {'label': 'admin.producer.infos.delete_image'|trans}) }}
                 {% endif %}
                 {{ form_errors(form.presentationImageFile) }}

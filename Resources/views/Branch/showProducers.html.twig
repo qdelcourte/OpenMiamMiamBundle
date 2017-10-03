@@ -32,7 +32,7 @@
                         <tr>
                             <td>
                                 {% if producer.profileImage is not null %}
-                                    <img src="{{ asset(get_producer_profile_image_path(producer))|imagine_filter('s') }}" class="img-circle" alt="{{ producer.name }}" />
+                                    <img src="{{ get_producer_profile_image_path(producer)|imagine_filter('s') }}" class="img-circle" alt="{{ producer.name }}" />
                                 {% endif %}
                             </td>
                             <td>
