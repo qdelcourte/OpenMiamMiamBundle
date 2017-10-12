@@ -9,6 +9,20 @@
     {% block title %}{{ 'catalog.product.title'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}{% endblock %}
     {% block meta_description %}{{ 'catalog.product.meta_description'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}{% endblock %}
 
+	{% block meta %}
+		{{ parent() }}
+        <meta property="og:url"           content="{{ app.request.Uri }}" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="{{ 'catalog.product.title'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}" />
+        <meta property="og:description"   content="{{ 'catalog.product.meta_description'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}" />
+
+		{% if product.image is not null %}
+            <meta property="og:image"     content="{{ get_image_product_path(product)|imagine_filter('l') }}" />
+		{% else %}
+            <meta property="og:image"     content="{{ 'bundles/isicsopenmiammiam/img/picture_placeholder.png'|imagine_filter('l') }}" />
+		{% endif %}
+	{% endblock %}
+
     {% block content %}
         {% set root_category = product.category %}
         {% if root_category.lvl >= 2 %}
@@ -63,15 +77,14 @@
                     </dd>
 
                     {{ render(controller('IsicsOpenMiamMiamBundle:Cart:ShowAddForm', {'branch': branch, 'product': product, 'view': 'IsicsOpenMiamMiamBundle:Catalog:showProductAddForm.html.twig'})) }}
+                </dl>
             </div>
         </div>
 
         <div class="clearfix">&nbsp;</div>
 
         {% if product.description %}
-            <div class="well">
-                {{ product.description|raw }}
-            </div>
+            {% include 'IsicsOpenMiamMiamBundle:Catalog:productDescription.html.twig' with {'product': product} %}
         {% endif %}
 
         {% if showNoPriceStatement %}
