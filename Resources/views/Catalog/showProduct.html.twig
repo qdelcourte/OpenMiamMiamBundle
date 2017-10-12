@@ -93,9 +93,7 @@
 
         <div class="clearfix">&nbsp;</div>
 
-        {% if product.description %}
-            {% include 'IsicsOpenMiamMiamBundle:Catalog:productDescription.html.twig' with {'product': product} %}
-        {% endif %}
+        {% include 'IsicsOpenMiamMiamBundle:Catalog:productDescription.html.twig' with {'product': product} %}
 
         {% if showNoPriceStatement %}
             {% include 'IsicsOpenMiamMiamBundle:Branch:noPriceStatement.html.twig' %}
