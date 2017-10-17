@@ -42,7 +42,7 @@
             {% endif %}
             {% if producer.presentationImage is not null %}
                 <p class="text-center">
-                    <img src="{{ asset(get_producer_presentation_image_path(producer))|imagine_filter('l') }}" class="img-thumbnail" alt="{{ producer.name }}" />
+                    <img src="{{ get_producer_presentation_image_path(producer)|imagine_filter('l') }}" class="img-thumbnail" alt="{{ producer.name }}" />
                 </p>
             {% endif %}
 
