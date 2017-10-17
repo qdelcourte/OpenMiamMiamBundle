@@ -9,6 +9,23 @@
     {% block title %}{{ 'catalog.product.title'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}{% endblock %}
     {% block meta_description %}{{ 'catalog.product.meta_description'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}{% endblock %}
 
+    {% block meta %}
+        {{ parent() }}
+        <meta property="og:url" content="{{ app.request.Uri }}"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title"
+              content="{{ 'catalog.product.title'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}"/>
+        <meta property="og:description"
+              content="{{ 'catalog.product.meta_description'|trans({'%product_name%': product.name, '%producer_name%': product.producer.name, '%branch_name%': branch.name}, 'seo') }}"/>
+
+        {% if product.image is not null %}
+            <meta property="og:image" content="{{ get_image_product_path(product)|imagine_filter('l') }}"/>
+        {% else %}
+            <meta property="og:image"
+                  content="{{ 'bundles/isicsopenmiammiam/img/picture_placeholder.png'|imagine_filter('l') }}"/>
+        {% endif %}
+    {% endblock %}
+
     {% block content %}
         {% set root_category = product.category %}
         {% if root_category.lvl >= 2 %}
@@ -16,23 +33,30 @@
         {% endif %}
 
         <ol class="breadcrumb">
-            <li><a href="{{ path('open_miam_miam.branch.homepage', {'branchSlug': branch.slug}) }}">{{ 'homepage'|trans }}</a></li>
-            <li><a href="{{ path('open_miam_miam.catalog.category', {'branchSlug': branch.slug, 'categorySlug': root_category.slug}) }}">{{ root_category.name }}</a></li>
+            <li>
+                <a href="{{ path('open_miam_miam.branch.homepage', {'branchSlug': branch.slug}) }}">{{ 'homepage'|trans }}</a>
+            </li>
+            <li>
+                <a href="{{ path('open_miam_miam.catalog.category', {'branchSlug': branch.slug, 'categorySlug': root_category.slug}) }}">{{ root_category.name }}</a>
+            </li>
             <li class="active">{{ product.name }}</li>
         </ol>
 
         <div class="row">
             <div class="col-md-8 col-md-offset-4">
-                <h1>{{ product.name }}{% if product.isBio %}&nbsp;<strong class="bio"><span>{{ 'bio'|trans }}</span></strong>{% endif %}</h1>
+                <h1>{{ product.name }}{% if product.isBio %}&nbsp;<strong class="bio"><span>{{ 'bio'|trans }}</span>
+                        </strong>{% endif %}</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-4">
                 {% if product.image is not null %}
-                    <img src="{{ get_image_product_path(product)|imagine_filter('l') }}" alt="{{ product.name }}" class="img-thumbnail" />
+                    <img src="{{ get_image_product_path(product)|imagine_filter('l') }}" alt="{{ product.name }}"
+                         class="img-thumbnail"/>
                 {% else %}
-                    <img src="{{ 'bundles/isicsopenmiammiam/img/picture_placeholder.png'|imagine_filter('l') }}" alt="{{ product.name }}" class="img-thumbnail" />
+                    <img src="{{ 'bundles/isicsopenmiammiam/img/picture_placeholder.png'|imagine_filter('l') }}"
+                         alt="{{ product.name }}" class="img-thumbnail"/>
                 {% endif %}
             </div>
             <div class="col-md-8">
@@ -46,7 +70,7 @@
                     <dt>{{ 'producer'|trans }}</dt>
                     <dd>
                         <a href="{{ path('open_miam_miam.producer', {'producerSlug': product.producer.slug}) }}">
-                            <span class="glyphicon glyphicon-user"></span>  {{ product.producer }}
+                            <span class="glyphicon glyphicon-user"></span> {{ product.producer }}
                         </a>
                     </dd>
                     <dt>{{ 'price'|trans }}</dt>
@@ -63,16 +87,13 @@
                     </dd>
 
                     {{ render(controller('IsicsOpenMiamMiamBundle:Cart:ShowAddForm', {'branch': branch, 'product': product, 'view': 'IsicsOpenMiamMiamBundle:Catalog:showProductAddForm.html.twig'})) }}
+                </dl>
             </div>
         </div>
 
         <div class="clearfix">&nbsp;</div>
 
-        {% if product.description %}
-            <div class="well">
-                {{ product.description|raw }}
-            </div>
-        {% endif %}
+        {% include 'IsicsOpenMiamMiamBundle:Catalog:productDescription.html.twig' with {'product': product} %}
 
         {% if showNoPriceStatement %}
             {% include 'IsicsOpenMiamMiamBundle:Branch:noPriceStatement.html.twig' %}
@@ -83,7 +104,7 @@
     {% block javascript %}
         {{ parent() }}
         <script type="text/javascript">
-            $(function() { 
+            $(function () {
                 new OpenMiamMiam.Quantity;
                 new OpenMiamMiam.CartAddForm;
             });
