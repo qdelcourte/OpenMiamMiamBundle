@@ -33,7 +33,7 @@
         <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><![endif]-->
     </head>
     <body{% block body_attributes %}{% endblock %}>
-        <div class="container">
+        <div id="container-main" class="container">
             {% block header_nav %}
                 <ul id="header-nav" class="nav nav-pills pull-right">
                     {% if app.user %}
