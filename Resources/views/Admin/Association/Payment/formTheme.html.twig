@@ -1,8 +1,8 @@
-{% block open_miam_miam_payments_for_allocate_payment_label %}
+{% block payments_for_allocate_payment_label %}
 
 {% endblock %}
 
-{% block open_miam_miam_payments_for_allocate_payment_widget %}
+{% block payments_for_allocate_payment_widget %}
     <table class="payments">
         {% for child in form %}
             {% set payment = form.vars.choices[child.vars.value].data %}
@@ -40,7 +40,7 @@
 
 {% endblock %}
 
-{% block open_miam_miam_payment_row %}
+{% block payment_row %}
     <table class="new-payment">
         <tr>
             {% if without_checkbox is not defined or without_checkbox == false %}
@@ -74,11 +74,11 @@
 
 {% endblock %}
 
-{% block open_miam_miam_sales_orders_for_allocate_payment_label %}
+{% block sales_orders_for_allocate_payment_label %}
 
 {% endblock %}
 
-{% block open_miam_miam_sales_orders_for_allocate_payment_widget %}
+{% block sales_orders_for_allocate_payment_widget %}
     <table class="sales-orders">
         {% for child in form %}
             {% set salesOrder = form.vars.choices[child.vars.value].data %}
