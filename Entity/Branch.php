@@ -143,18 +143,53 @@ class Branch
     private $associationProducers;
 
     /**
-     * @var Doctrine\Common\Collections\Collection $products
+     * @var \Doctrine\Common\Collections\Collection $products
      *
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="branches")
      */
     private $products;
 
     /**
-     * @var Doctrine\Common\Collection\Collection $articles
+     * @var \Doctrine\Common\Collections\Collection $articles
      *
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="branches")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $sinRadLatitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $cosRadLatitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $radLongitude;
 
     /**
      * Constructor
@@ -565,7 +600,7 @@ class Branch
     }
 
     /**
-     * @param Doctrine\Common\Collection\Collection $articles
+     * @param \Doctrine\Common\Collections\Collection $articles
      */
     public function setArticles($articles)
     {
@@ -573,10 +608,95 @@ class Branch
     }
 
     /**
-     * @return Doctrine\Common\Collection\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * @param float $cosRadLatitude
+     */
+    public function setCosRadLatitude($cosRadLatitude)
+    {
+        $this->cosRadLatitude = $cosRadLatitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCosRadLatitude()
+    {
+        return $this->cosRadLatitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        $this->setSinRadLatitude(sin(deg2rad($latitude)));
+        $this->setCosRadLatitude(cos(deg2rad($latitude)));
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        $this->setRadLongitude(deg2rad($longitude));
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $radLongitude
+     */
+    public function setRadLongitude($radLongitude)
+    {
+        $this->radLongitude = $radLongitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRadLongitude()
+    {
+        return $this->radLongitude;
+    }
+
+    /**
+     * @param float $sinRadLatitude
+     */
+    public function setSinRadLatitude($sinRadLatitude)
+    {
+        $this->sinRadLatitude = $sinRadLatitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSinRadLatitude()
+    {
+        return $this->sinRadLatitude;
     }
 }
