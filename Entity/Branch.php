@@ -14,6 +14,7 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Isics\Bundle\OpenMiamMiamBundle\Model\Location;
 
 /**
  * Isics\OpenMiamMiamBundle\Entity\Branch
@@ -92,7 +93,7 @@ class Branch
      */
     private $city;
 
-   /**
+    /**
      * @var string $departmentNumber
      *
      * @ORM\Column(name="department_number", type="string", length=2, nullable=false)
@@ -143,26 +144,69 @@ class Branch
     private $associationProducers;
 
     /**
-     * @var Doctrine\Common\Collections\Collection $products
+     * @var \Doctrine\Common\Collections\Collection $products
      *
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="branches")
      */
     private $products;
 
     /**
-     * @var Doctrine\Common\Collection\Collection $articles
+     * @var \Doctrine\Common\Collections\Collection $articles
      *
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="branches")
      */
     private $articles;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     *
+     * @var int
+     */
+    private $locationStatus;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $sinRadLatitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $cosRadLatitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     *
+     * @var float
+     */
+    private $radLongitude;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->producers = new ArrayCollection();
-        $this->products  = new ArrayCollection();
+        $this->producers      = new ArrayCollection();
+        $this->products       = new ArrayCollection();
+        $this->locationStatus = Location::STATUS_PENDING;
     }
 
     /**
@@ -199,6 +243,7 @@ class Branch
      * Set slug
      *
      * @param string $slug
+     *
      * @return Branch
      */
     public function setSlug($slug)
@@ -222,6 +267,7 @@ class Branch
      * Set homepage presentation
      *
      * @param string $welcomeText
+     *
      * @return Branch
      */
     public function setWelcomeText($welcomeText)
@@ -245,6 +291,7 @@ class Branch
      * Set presentation
      *
      * @param string $presentation
+     *
      * @return Branch
      */
     public function setPresentation($presentation)
@@ -268,6 +315,7 @@ class Branch
      * Set address1
      *
      * @param string $address1
+     *
      * @return Branch
      */
     public function setAddress1($address1)
@@ -291,6 +339,7 @@ class Branch
      * Set address2
      *
      * @param string $address2
+     *
      * @return Branch
      */
     public function setAddress2($address2)
@@ -314,6 +363,7 @@ class Branch
      * Set zipcode
      *
      * @param string $zipcode
+     *
      * @return Branch
      */
     public function setZipcode($zipcode)
@@ -337,6 +387,7 @@ class Branch
      * Set city
      *
      * @param string $city
+     *
      * @return Branch
      */
     public function setCity($city)
@@ -384,6 +435,7 @@ class Branch
      * Set phoneNumber1
      *
      * @param string $phoneNumber1
+     *
      * @return Branch
      */
     public function setPhoneNumber1($phoneNumber1)
@@ -407,6 +459,7 @@ class Branch
      * Set phoneNumber2
      *
      * @param string $phoneNumber2
+     *
      * @return Branch
      */
     public function setPhoneNumber2($phoneNumber2)
@@ -430,6 +483,7 @@ class Branch
      * Set website
      *
      * @param string $website
+     *
      * @return Branch
      */
     public function setWebsite($website)
@@ -453,6 +507,7 @@ class Branch
      * Set facebook
      *
      * @param string $facebook
+     *
      * @return Branch
      */
     public function setFacebook($facebook)
@@ -476,6 +531,7 @@ class Branch
      * Set association
      *
      * @param Association $association
+     *
      * @return Branch
      */
     public function setAssociation(Association $association)
@@ -533,6 +589,7 @@ class Branch
      * Add product
      *
      * @param Product $product
+     *
      * @return Branch
      */
     public function addProduct(Product $product)
@@ -565,7 +622,7 @@ class Branch
     }
 
     /**
-     * @param Doctrine\Common\Collection\Collection $articles
+     * @param \Doctrine\Common\Collections\Collection $articles
      */
     public function setArticles($articles)
     {
@@ -573,10 +630,111 @@ class Branch
     }
 
     /**
-     * @return Doctrine\Common\Collection\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {
         return $this->articles;
+    }
+
+    /**
+     * @param float $cosRadLatitude
+     */
+    public function setCosRadLatitude($cosRadLatitude)
+    {
+        $this->cosRadLatitude = $cosRadLatitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getCosRadLatitude()
+    {
+        return $this->cosRadLatitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        $this->setSinRadLatitude(sin(deg2rad($latitude)));
+        $this->setCosRadLatitude(cos(deg2rad($latitude)));
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        $this->setRadLongitude(deg2rad($longitude));
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $radLongitude
+     */
+    public function setRadLongitude($radLongitude)
+    {
+        $this->radLongitude = $radLongitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRadLongitude()
+    {
+        return $this->radLongitude;
+    }
+
+    /**
+     * @param float $sinRadLatitude
+     */
+    public function setSinRadLatitude($sinRadLatitude)
+    {
+        $this->sinRadLatitude = $sinRadLatitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSinRadLatitude()
+    {
+        return $this->sinRadLatitude;
+    }
+
+    /**
+     * @param int $locationStatus
+     */
+    public function setLocationStatus($locationStatus)
+    {
+        $this->locationStatus = $locationStatus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationStatus()
+    {
+        return $this->locationStatus;
     }
 }
