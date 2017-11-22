@@ -14,6 +14,7 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Isics\Bundle\OpenMiamMiamBundle\Model\Location;
 
 /**
  * Isics\OpenMiamMiamBundle\Entity\Branch
@@ -92,7 +93,7 @@ class Branch
      */
     private $city;
 
-   /**
+    /**
      * @var string $departmentNumber
      *
      * @ORM\Column(name="department_number", type="string", length=2, nullable=false)
@@ -157,6 +158,13 @@ class Branch
     private $articles;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     *
+     * @var int
+     */
+    private $locationStatus;
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      *
      * @var float
@@ -196,8 +204,9 @@ class Branch
      */
     public function __construct()
     {
-        $this->producers = new ArrayCollection();
-        $this->products  = new ArrayCollection();
+        $this->producers      = new ArrayCollection();
+        $this->products       = new ArrayCollection();
+        $this->locationStatus = Location::STATUS_PENDING;
     }
 
     /**
@@ -234,6 +243,7 @@ class Branch
      * Set slug
      *
      * @param string $slug
+     *
      * @return Branch
      */
     public function setSlug($slug)
@@ -257,6 +267,7 @@ class Branch
      * Set homepage presentation
      *
      * @param string $welcomeText
+     *
      * @return Branch
      */
     public function setWelcomeText($welcomeText)
@@ -280,6 +291,7 @@ class Branch
      * Set presentation
      *
      * @param string $presentation
+     *
      * @return Branch
      */
     public function setPresentation($presentation)
@@ -303,6 +315,7 @@ class Branch
      * Set address1
      *
      * @param string $address1
+     *
      * @return Branch
      */
     public function setAddress1($address1)
@@ -326,6 +339,7 @@ class Branch
      * Set address2
      *
      * @param string $address2
+     *
      * @return Branch
      */
     public function setAddress2($address2)
@@ -349,6 +363,7 @@ class Branch
      * Set zipcode
      *
      * @param string $zipcode
+     *
      * @return Branch
      */
     public function setZipcode($zipcode)
@@ -372,6 +387,7 @@ class Branch
      * Set city
      *
      * @param string $city
+     *
      * @return Branch
      */
     public function setCity($city)
@@ -419,6 +435,7 @@ class Branch
      * Set phoneNumber1
      *
      * @param string $phoneNumber1
+     *
      * @return Branch
      */
     public function setPhoneNumber1($phoneNumber1)
@@ -442,6 +459,7 @@ class Branch
      * Set phoneNumber2
      *
      * @param string $phoneNumber2
+     *
      * @return Branch
      */
     public function setPhoneNumber2($phoneNumber2)
@@ -465,6 +483,7 @@ class Branch
      * Set website
      *
      * @param string $website
+     *
      * @return Branch
      */
     public function setWebsite($website)
@@ -488,6 +507,7 @@ class Branch
      * Set facebook
      *
      * @param string $facebook
+     *
      * @return Branch
      */
     public function setFacebook($facebook)
@@ -511,6 +531,7 @@ class Branch
      * Set association
      *
      * @param Association $association
+     *
      * @return Branch
      */
     public function setAssociation(Association $association)
@@ -568,6 +589,7 @@ class Branch
      * Add product
      *
      * @param Product $product
+     *
      * @return Branch
      */
     public function addProduct(Product $product)
@@ -698,5 +720,21 @@ class Branch
     public function getSinRadLatitude()
     {
         return $this->sinRadLatitude;
+    }
+
+    /**
+     * @param int $locationStatus
+     */
+    public function setLocationStatus($locationStatus)
+    {
+        $this->locationStatus = $locationStatus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationStatus()
+    {
+        return $this->locationStatus;
     }
 }

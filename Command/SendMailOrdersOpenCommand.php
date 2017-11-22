@@ -40,6 +40,8 @@ class SendMailOrdersOpenCommand extends ContainerAwareCommand
         $startMicroTime = microtime(true);
         $mailNumber = 0;
 
+        $em = $this->getContainer()->get('doctrine.orm.default_entity_manager');
+
         $period = $input->getArgument('period');
         if (0 >= (int)$period) {
             throw new \InvalidArgumentException('Period argument must be a integer great than 0. Input was: '.$period);
@@ -118,10 +120,14 @@ class SendMailOrdersOpenCommand extends ContainerAwareCommand
 
                     $mailer->send($message);
 
+                    $customer->setLastRelaunchAt($now);
+
                     ++$mailNumber;
 
                     $output->writeln(sprintf('<info>- %s</info>', $customer->getEmail()));
                 }
+
+                $em->flush();
 
                 $output->writeln('');
             }
