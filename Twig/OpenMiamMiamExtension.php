@@ -16,7 +16,6 @@ use Isics\Bundle\OpenMiamMiamBundle\Entity\BranchOccurrence;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Category;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Producer;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Product;
-use Isics\Bundle\OpenMiamMiamBundle\Entity\SalesOrder;
 use Isics\Bundle\OpenMiamMiamBundle\Manager\BranchOccurrenceManager;
 use Isics\Bundle\OpenMiamMiamBundle\Manager\ConsumerManager;
 use Isics\Bundle\OpenMiamMiamBundle\Manager\ProducerManager;
@@ -57,10 +56,16 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
     private $branchOccurrenceManager;
 
     /**
+     * @var string
+     */
+    private $locale;
+
+    /**
      * Constructor
      *
      * @param string                  $title                   Title
      * @param string                  $currency                Currency
+     * @param string                  $locale
      * @param ProductManager          $productManager          Product manager
      * @param ProducerManager         $producerManager         Producer manager
      * @param ConsumerManager         $consumerManager         Consumer manager
@@ -68,6 +73,7 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
      */
     public function __construct($title,
                                 $currency,
+                                $locale,
                                 ProductManager $productManager,
                                 ProducerManager $producerManager,
                                 ConsumerManager $consumerManager,
@@ -80,6 +86,7 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
         $this->producerManager         = $producerManager;
         $this->consumerManager         = $consumerManager;
         $this->branchOccurrenceManager = $branchOccurrenceManager;
+        $this->locale                  = $locale;
     }
 
     /**
@@ -91,7 +98,8 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
     {
         return array(
             new \Twig_SimpleFilter('format_consumer_ref', array($this, 'formatConsumerRef')),
-            new \Twig_SimpleFilter('format_currency_symbol', array($this, 'formatCurrencySymbol'))
+            new \Twig_SimpleFilter('format_currency_symbol', array($this, 'formatCurrencySymbol')),
+            new \Twig_SimpleFilter('format_quantity', array($this, 'formatQuantity')),
         );
     }
 
@@ -134,6 +142,30 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
     }
 
     /**
+     * @param float  $quantity
+     * @param string $unit
+     *
+     * @return string
+     */
+    public function formatQuantity($quantity, $unit)
+    {
+        $nf = new \NumberFormatter($this->locale, \NumberFormatter::DECIMAL);
+
+        $nf->setAttribute(\NumberFormatter::FRACTION_DIGITS, 2);
+
+        $quantity = $nf->format($quantity);
+
+        if (null !== $unit && is_string($unit) && '' !== trim($unit)) {
+            $unit = trim($unit);
+        }
+
+        return implode(' ', array_filter(array(
+            $quantity,
+            $unit
+        )));
+    }
+
+    /**
      * Returns image product path
      *
      * @param Product $product
@@ -172,7 +204,7 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
     /**
      * Returns products to display
      *
-     * @param Branch $branch
+     * @param Branch   $branch
      * @param Category $category
      *
      * @return array
@@ -186,7 +218,7 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
      * Returns product availability
      *
      * @param BranchOccurrence $branchOccurrence
-     * @param Product $product
+     * @param Product          $product
      *
      * @return array
      */
@@ -206,7 +238,8 @@ class OpenMiamMiamExtension extends \Twig_Extension implements \Twig_Extension_G
             'open_miam_miam' => array(
                 'title'    => $this->title,
                 'currency' => $this->currency,
-        ));
+            )
+        );
     }
 
     /**
