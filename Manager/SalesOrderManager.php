@@ -188,6 +188,7 @@ class SalesOrderManager
             $orderRow->setRef($product->getRef());
             $orderRow->setIsBio($product->getIsBio());
             $orderRow->setUnitPrice($product->getPrice());
+            $orderRow->setBuyingUnit($product->getBuyingUnit());
             $orderRow->setQuantity($item->getQuantity());
             $orderRow->setCommission($associationHasProducer->getInheritedOrDefinedCommission());
 
@@ -440,6 +441,7 @@ class SalesOrderManager
             $salesOrderRow->setRef($product->getRef());
             $salesOrderRow->setIsBio($product->getIsBio());
             $salesOrderRow->setUnitPrice($product->getPrice());
+            $salesOrderRow->setBuyingUnit($product->getBuyingUnit());
             $salesOrderRow->setQuantity(1);
             $salesOrderRow->setCommission($associationHasProducer->getInheritedOrDefinedCommission());
 

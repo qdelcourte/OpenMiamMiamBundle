@@ -102,6 +102,13 @@ class SalesOrderRow
     private $quantity;
 
     /**
+     * @ORM\Column(name="buying_unit", type="string", length=64, nullable=true)
+     *
+     * @var string $buyingUnit
+     */
+    private $buyingUnit;
+
+    /**
      * @var float
      */
     private $oldQuantity;
@@ -320,5 +327,21 @@ class SalesOrderRow
     public function postLoad()
     {
         $this->oldQuantity = $this->quantity;
+    }
+
+    /**
+     * @param mixed $buyingUnit
+     */
+    public function setBuyingUnit($buyingUnit)
+    {
+        $this->buyingUnit = $buyingUnit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBuyingUnit()
+    {
+        return $this->buyingUnit;
     }
 }
