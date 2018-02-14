@@ -330,7 +330,7 @@ class SalesOrderRow
     }
 
     /**
-     * @param mixed $buyingUnit
+     * @param string $buyingUnit
      */
     public function setBuyingUnit($buyingUnit)
     {
@@ -338,7 +338,7 @@ class SalesOrderRow
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getBuyingUnit()
     {
