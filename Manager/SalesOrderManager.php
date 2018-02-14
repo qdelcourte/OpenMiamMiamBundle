@@ -189,6 +189,7 @@ class SalesOrderManager
             $orderRow->setIsBio($product->getIsBio());
             $orderRow->setUnitPrice($product->getPrice());
             $orderRow->setQuantity($item->getQuantity());
+            $orderRow->setBuyingUnit($product->getBuyingUnit());
             $orderRow->setCommission($associationHasProducer->getInheritedOrDefinedCommission());
 
             $order->addSalesOrderRow($orderRow);
@@ -441,6 +442,7 @@ class SalesOrderManager
             $salesOrderRow->setIsBio($product->getIsBio());
             $salesOrderRow->setUnitPrice($product->getPrice());
             $salesOrderRow->setQuantity(1);
+            $salesOrderRow->setBuyingUnit($product->getBuyingUnit());
             $salesOrderRow->setCommission($associationHasProducer->getInheritedOrDefinedCommission());
 
             $order->addSalesOrderRow($salesOrderRow);

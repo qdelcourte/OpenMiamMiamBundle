@@ -200,6 +200,7 @@ services:
         arguments:
             - %open_miam_miam.title%
             - %open_miam_miam.currency%
+            - %locale%
             - '@open_miam_miam.product_manager'
             - '@open_miam_miam.producer_manager'
             - '@open_miam_miam.consumer_manager'

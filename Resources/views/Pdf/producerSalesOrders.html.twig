@@ -46,7 +46,7 @@
                                     {% endif %}
                                 {% endif %}
                             </strong>
-                            {% if order.user is defined %}
+                            {% if order.user is not null %}
                                 <br />{{ order.user.zipcode }} {{ order.user.city }}
                             {% endif %}
                         </td>
@@ -71,7 +71,7 @@
                         <tr {% if row.total == 0 %}style="color:red;"{% endif %}>
                             <td width="40%">{{ row.name }}</td>
                             <td width="20%" align="right">{{ row.unitPrice|number_format_currency(open_miam_miam.currency) }}</td>
-                            <td width="20%" align="center">{{ row.quantity }}</td>
+                            <td width="20%" align="center">{{ row.quantity|format_quantity(row.buyingUnit) }}</td>
                             <td width="20%" align="right">{{ row.total|number_format_currency(open_miam_miam.currency) }}</td>
                         </tr>
                     {% endfor %}

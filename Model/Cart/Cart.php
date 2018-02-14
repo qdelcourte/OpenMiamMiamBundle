@@ -29,12 +29,12 @@ class Cart implements \Serializable
     protected $branch;
 
     /**
-     * @var array $items
+     * @var CartItem[] $items
      */
     protected $items;
 
     /**
-     * @var decimal $total
+     * @var float $total
      */
     protected $total;
 
@@ -83,7 +83,7 @@ class Cart implements \Serializable
     /**
      * Returns items
      *
-     * @return array
+     * @return CartItem[]
      */
     public function getItems()
     {
@@ -130,7 +130,7 @@ class Cart implements \Serializable
         }
 
         if (0 === $this->items[$item->getProductId()]->getQuantity()) {
-            $this->removeItems($item);
+            $this->removeItem($item);
         }
 
         if ($compute) {
@@ -186,7 +186,7 @@ class Cart implements \Serializable
     /**
      * Returns total
      *
-     * @return decimal
+     * @return float
      */
     public function getTotal()
     {
