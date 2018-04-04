@@ -435,7 +435,7 @@ services:
 
     open_miam_miam.sales_orders_pdf:
         class:     %open_miam_miam.sales_orders_pdf.class%
-        arguments: ['@open_miam_miam.pdf', '@templating']
+        arguments: ['@open_miam_miam.pdf', '@open_miam_miam.repository.subcription', '@templating']
         shared:    false
 
     open_miam_miam.producer_sales_orders_pdf:

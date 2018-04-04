@@ -12,6 +12,10 @@
 namespace Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder;
 
 use Isics\Bundle\OpenMiamMiamBundle\Document\OpenMiamMiamPDF;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\Repository\SalesOrderRepository;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\Repository\SubscriptionRepository;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\SalesOrder;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\Subscription;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 class SalesOrdersPdf
@@ -31,17 +35,23 @@ class SalesOrdersPdf
      */
     protected $salesOrders;
 
+	/**
+	 * @var $salesOrderRepository
+	 */
+	protected $subscriptionRepository;
 
     /**
      * Constructs object
      *
      * @param TCPDF $pdf
      * @param EngineInterface $engine
+	 * @param SalesOrderRepository
      */
-    public function __construct(\TCPDF $pdf, EngineInterface $engine)
+    public function __construct(\TCPDF $pdf, SubscriptionRepository $subscriptionRepository, EngineInterface $engine)
     {
         $this->pdf = $pdf;
         $this->engine = $engine;
+        $this->subscriptionRepository = $subscriptionRepository;
     }
 
     /**
@@ -59,10 +69,14 @@ class SalesOrdersPdf
      */
     public function build()
     {
+
         foreach ($this->salesOrders as $salesOrder) {
+			$user = $salesOrder->getUser();
+			$association = $salesOrder->getBranchOccurrence()->getBranch()->getAssociation();
+			$balance = $this->subscriptionRepository->getBalanceUserAndAssociation($user,$association);
             $this->pdf->AddPage();
             $this->pdf->writeHTML(
-                $this->engine->render('IsicsOpenMiamMiamBundle:Pdf:salesOrder.html.twig', array('order' => $salesOrder))
+                $this->engine->render('IsicsOpenMiamMiamBundle:Pdf:salesOrder.html.twig', array('order' => $salesOrder, 'balance' => $balance))
             );
         }
 
