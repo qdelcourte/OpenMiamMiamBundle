@@ -136,7 +136,7 @@ class SubscriptionRepository extends EntityRepository
      * @param Association $association
      * @return float
      */
-    public function getFromUserAndAssociation(User $user, Association $association)
+    public function findByUserAndAssociation(User $user, Association $association)
     {
         $qb = $this->createQueryBuilder('su')
             ->andWhere("su.user = :user")

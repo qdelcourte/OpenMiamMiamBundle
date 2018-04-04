@@ -66,7 +66,7 @@ class SalesOrdersPdf
     public function build()
     {
         foreach ($this->salesOrders as $salesOrder) {
-            $subscription = $this->subscriptionRepository->getFromUserAndAssociation(
+            $subscription = $this->subscriptionRepository->findByUserAndAssociation(
                 $salesOrder->getUser(),
                 $salesOrder->getBranchOccurrence()->getBranch()->getAssociation()
             );
