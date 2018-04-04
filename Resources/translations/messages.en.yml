@@ -935,7 +935,7 @@ pdf.products_to_prepare.quantity:       "Quantity"
 pdf.products_to_prepare.total:          "Total"
 pdf.producer_sales_orders.title:        "Sales orders"
 pdf.producer_sales_orders.producer:     "Producer"
-pdf.sales_order.subsription.balance:    "Balance at "
+pdf.sales_order.subsription.balance:    "Balance at %date%"
 
 # Tree
 tree.position.first_child:      "First child"

@@ -61,13 +61,10 @@
             <tr>
                 <td>
                     <br/>
-                    {% if  balance >= 0 %}
-                        <p class="positiveBalance">{{ 'pdf.sales_order.subsription.balance'|trans }} {{ date()|format_date(null,null,null,constant('IntlDateFormatter::LONG')) }} : {{ balance }}
-                            &euro;</p>
-                    {% else %}
-                        <p class="negativeBalance">{{ 'pdf.sales_order.subsription.balance'|trans }} {{ date()|format_date(null,null,null,constant('IntlDateFormatter::LONG')) }} : {{ balance }}
-                            &euro;</p>
-                    {% endif %}
+
+                    <p class="{{ subscription.credit >= 0 ? "positiveBalance" : "negativeBalance" }}">{{ 'pdf.sales_order.subsription.balance'|trans({'%date%': date()|localizeddate('short','short')}) }}
+                        : {{ subscription.credit }} &euro;
+                    </p>
                 </td>
             </tr>
             </tbody>

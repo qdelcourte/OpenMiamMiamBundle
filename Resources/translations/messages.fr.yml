@@ -992,7 +992,7 @@ pdf.products_to_prepare.quantity:       "Quantité"
 pdf.products_to_prepare.total:          "Total"
 pdf.producer_sales_orders.title:        "Commandes"
 pdf.producer_sales_orders.producer:     "Producteur :"
-pdf.sales_order.subsription.balance:    "Solde au "
+pdf.sales_order.subsription.balance:    "Solde au %date%"
 
 
 

@@ -16,129 +16,126 @@ use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
 use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 
 class SubscriptionRepository extends EntityRepository {
-	/**
-	 * Returns subscriptions for association
-	 *
-	 * @param Association $association
-	 * @param QueryBuilder $qb
-	 *
-	 * @return QueryBuilder
-	 */
-	public function getForAssociationQueryBuilder(Association $association, QueryBuilder $qb = null) {
-		$qb = null === $qb ? $this->createQueryBuilder('s') : $qb;
+    /**
+     * Returns subscriptions for association
+     *
+     * @param Association $association
+     * @param QueryBuilder $qb
+     *
+     * @return QueryBuilder
+     */
+    public function getForAssociationQueryBuilder(Association $association, QueryBuilder $qb = null) {
+        $qb = null === $qb ? $this->createQueryBuilder('s') : $qb;
 
-		return $qb->leftJoin('s.user', 'u')
-			->andWhere('s.association = :association')
-			->setParameter('association', $association)
-			->addOrderBy('u.id');
-	}
+        return $qb->leftJoin('s.user', 'u')
+            ->andWhere('s.association = :association')
+            ->setParameter('association', $association)
+            ->addOrderBy('u.id');
+    }
 
-	/**
-	 * Filters users by id
-	 *
-	 * @param QueryBuilder $qb
-	 * @param integer $ref
-	 *
-	 * @return QueryBuilder
-	 */
-	public function refFilter(QueryBuilder $qb, $ref) {
-		if ($ref !== null) {
-			return $qb
-				->andWhere('u.id = :ref')
-				->setParameter('ref', $ref);
-		}
+    /**
+     * Filters users by id
+     *
+     * @param QueryBuilder $qb
+     * @param integer $ref
+     *
+     * @return QueryBuilder
+     */
+    public function refFilter(QueryBuilder $qb, $ref) {
+        if ($ref !== null) {
+            return $qb
+                ->andWhere('u.id = :ref')
+                ->setParameter('ref', $ref);
+        }
 
-		return $qb;
-	}
+        return $qb;
+    }
 
-	/**
-	 * Filters users by last name
-	 *
-	 * @param QueryBuilder $qb
-	 * @param string $lastName
-	 *
-	 * @return QueryBuilder
-	 */
-	public function lastNameFilter(QueryBuilder $qb, $lastName) {
-		if ($lastName !== null) {
-			return $qb
-				->andWhere('u.lastname LIKE :lastName')
-				->setParameter('lastName', '%' . $lastName . '%');
-		}
+    /**
+     * Filters users by last name
+     *
+     * @param QueryBuilder $qb
+     * @param string $lastName
+     *
+     * @return QueryBuilder
+     */
+    public function lastNameFilter(QueryBuilder $qb, $lastName) {
+        if ($lastName !== null) {
+            return $qb
+                ->andWhere('u.lastname LIKE :lastName')
+                ->setParameter('lastName', '%' . $lastName . '%');
+        }
 
-		return $qb;
-	}
+        return $qb;
+    }
 
-	/**
-	 * Filters users by first name
-	 *
-	 * @param QueryBuilder $qb
-	 * @param $firstName
-	 *
-	 * @return QueryBuilder
-	 */
-	public function firstNameFilter(QueryBuilder $qb, $firstName) {
-		if ($firstName !== null) {
-			return $qb
-				->andWhere('u.firstname LIKE :firstName')
-				->setParameter('firstName', '%' . $firstName . '%');
-		}
+    /**
+     * Filters users by first name
+     *
+     * @param QueryBuilder $qb
+     * @param $firstName
+     *
+     * @return QueryBuilder
+     */
+    public function firstNameFilter(QueryBuilder $qb, $firstName) {
+        if ($firstName !== null) {
+            return $qb
+                ->andWhere('u.firstname LIKE :firstName')
+                ->setParameter('firstName', '%' . $firstName . '%');
+        }
 
-		return $qb;
-	}
+        return $qb;
+    }
 
-	/**
-	 * Filters users and returns the creditors
-	 *
-	 * @param QueryBuilder $qb
-	 * @param boolean $creditor
-	 *
-	 * @return QueryBuilder
-	 */
-	public function creditorFilter(QueryBuilder $qb, $creditor) {
-		if ($creditor == true) {
-			return $qb->andWhere('s.credit < 0');
-		}
+    /**
+     * Filters users and returns the creditors
+     *
+     * @param QueryBuilder $qb
+     * @param boolean $creditor
+     *
+     * @return QueryBuilder
+     */
+    public function creditorFilter(QueryBuilder $qb, $creditor) {
+        if ($creditor == true) {
+            return $qb->andWhere('s.credit < 0');
+        }
 
-		return $qb;
-	}
+        return $qb;
+    }
 
-	/**
-	 * Filters users and returns the users who are not deleted
-	 *
-	 * @param QueryBuilder $qb
-	 * @param boolean $showDeleted
-	 *
-	 * @return QueryBuilder
-	 */
-	public function deletedFilter(QueryBuilder $qb, $showDeleted = false) {
-		if (false === $showDeleted) {
-			$qb->andWhere($qb->expr()->orX(
-				$qb->expr()->isNull('u'),
-				$qb->expr()->eq('u.locked', 0)
-			));
-		}
+    /**
+     * Filters users and returns the users who are not deleted
+     *
+     * @param QueryBuilder $qb
+     * @param boolean $showDeleted
+     *
+     * @return QueryBuilder
+     */
+    public function deletedFilter(QueryBuilder $qb, $showDeleted = false) {
+        if (false === $showDeleted) {
+            $qb->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('u'),
+                $qb->expr()->eq('u.locked', 0)
+            ));
+        }
 
-		return $qb;
-	}
+        return $qb;
+    }
 
-	/**
-	 * Return the balance of user in function of association
-	 *
-	 * @param User $user
-	 * @param Association $association
-	 * @return float
-	 */
-	public function getBalanceUserAndAssociation(User $user, Association $association) {
-		$qb = $this->createQueryBuilder('su')
-			->select("su.credit")
-			->andWhere("su.user = :user")
-			->andWhere("su.association = :association")
-			->setParameter("association", $association)
-			->setParameter("user", $user);
+    /**
+     * Return the balance of user in function of association
+     *
+     * @param User $user
+     * @param Association $association
+     * @return float
+     */
+    public function getFromUserAndAssociation(User $user, Association $association) {
+        $qb = $this->createQueryBuilder('su')
+            ->andWhere("su.user = :user")
+            ->andWhere("su.association = :association")
+            ->setParameter("association", $association)
+            ->setParameter("user", $user);
 
-		$result = $qb->getQuery()->getSingleResult();
-
-		return $result['credit'];
-	}
+        return $qb->getQuery()->getSingleResult();
+    }
 }
