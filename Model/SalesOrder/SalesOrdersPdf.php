@@ -14,7 +14,8 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Repository\SubscriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
-class SalesOrdersPdf {
+class SalesOrdersPdf
+{
     /**
      * @var TCPDF $pdf
      */
@@ -42,7 +43,8 @@ class SalesOrdersPdf {
      * @param EngineInterface $engine
      * @param SalesOrderRepository
      */
-    public function __construct(\TCPDF $pdf, SubscriptionRepository $subscriptionRepository, EngineInterface $engine) {
+    public function __construct(\TCPDF $pdf, SubscriptionRepository $subscriptionRepository, EngineInterface $engine)
+    {
         $this->pdf = $pdf;
         $this->engine = $engine;
         $this->subscriptionRepository = $subscriptionRepository;
@@ -53,15 +55,16 @@ class SalesOrdersPdf {
      *
      * @param array $salesOrders
      */
-    public function setSalesOrders(array $salesOrders) {
+    public function setSalesOrders(array $salesOrders)
+    {
         $this->salesOrders = $salesOrders;
     }
 
     /**
      * Builds pdf
      */
-    public function build() {
-
+    public function build()
+    {
         foreach ($this->salesOrders as $salesOrder) {
             $subscription = $this->subscriptionRepository->getFromUserAndAssociation(
                 $salesOrder->getUser(),
@@ -69,7 +72,8 @@ class SalesOrdersPdf {
             );
             $this->pdf->AddPage();
             $this->pdf->writeHTML(
-                $this->engine->render('IsicsOpenMiamMiamBundle:Pdf:salesOrder.html.twig', array('order' => $salesOrder, 'subscription' => $subscription))
+                $this->engine->render('IsicsOpenMiamMiamBundle:Pdf:salesOrder.html.twig',
+                    array('order' => $salesOrder, 'subscription' => $subscription))
             );
         }
     }
@@ -81,7 +85,8 @@ class SalesOrdersPdf {
      *
      * @return string
      */
-    public function render($filename = null) {
+    public function render($filename = null)
+    {
         $this->build();
 
         return $this->pdf->Output($filename, 'I');

@@ -15,7 +15,8 @@ use Doctrine\ORM\QueryBuilder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
 use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 
-class SubscriptionRepository extends EntityRepository {
+class SubscriptionRepository extends EntityRepository
+{
     /**
      * Returns subscriptions for association
      *
@@ -24,7 +25,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function getForAssociationQueryBuilder(Association $association, QueryBuilder $qb = null) {
+    public function getForAssociationQueryBuilder(Association $association, QueryBuilder $qb = null)
+    {
         $qb = null === $qb ? $this->createQueryBuilder('s') : $qb;
 
         return $qb->leftJoin('s.user', 'u')
@@ -41,7 +43,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function refFilter(QueryBuilder $qb, $ref) {
+    public function refFilter(QueryBuilder $qb, $ref)
+    {
         if ($ref !== null) {
             return $qb
                 ->andWhere('u.id = :ref')
@@ -59,7 +62,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function lastNameFilter(QueryBuilder $qb, $lastName) {
+    public function lastNameFilter(QueryBuilder $qb, $lastName)
+    {
         if ($lastName !== null) {
             return $qb
                 ->andWhere('u.lastname LIKE :lastName')
@@ -77,7 +81,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function firstNameFilter(QueryBuilder $qb, $firstName) {
+    public function firstNameFilter(QueryBuilder $qb, $firstName)
+    {
         if ($firstName !== null) {
             return $qb
                 ->andWhere('u.firstname LIKE :firstName')
@@ -95,7 +100,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function creditorFilter(QueryBuilder $qb, $creditor) {
+    public function creditorFilter(QueryBuilder $qb, $creditor)
+    {
         if ($creditor == true) {
             return $qb->andWhere('s.credit < 0');
         }
@@ -111,7 +117,8 @@ class SubscriptionRepository extends EntityRepository {
      *
      * @return QueryBuilder
      */
-    public function deletedFilter(QueryBuilder $qb, $showDeleted = false) {
+    public function deletedFilter(QueryBuilder $qb, $showDeleted = false)
+    {
         if (false === $showDeleted) {
             $qb->andWhere($qb->expr()->orX(
                 $qb->expr()->isNull('u'),
@@ -129,7 +136,8 @@ class SubscriptionRepository extends EntityRepository {
      * @param Association $association
      * @return float
      */
-    public function getFromUserAndAssociation(User $user, Association $association) {
+    public function getFromUserAndAssociation(User $user, Association $association)
+    {
         $qb = $this->createQueryBuilder('su')
             ->andWhere("su.user = :user")
             ->andWhere("su.association = :association")
