@@ -13,6 +13,7 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\Subscription;
 use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 
 class SubscriptionRepository extends EntityRepository
@@ -130,11 +131,12 @@ class SubscriptionRepository extends EntityRepository
     }
 
     /**
-     * Return the balance of user in function of association
+     * Return subscription of user and his association
      *
      * @param User $user
      * @param Association $association
-     * @return float
+     * 
+     * @return Subscription
      */
     public function findByUserAndAssociation(User $user, Association $association)
     {

@@ -32,7 +32,7 @@ class SalesOrdersPdf
     protected $salesOrders;
 
     /**
-     * @var $salesOrderRepository
+     * @var SubscriptionRepository
      */
     protected $subscriptionRepository;
 
@@ -40,8 +40,9 @@ class SalesOrdersPdf
      * Constructs object
      *
      * @param TCPDF $pdf
+     * @param SubscriptionRepository
      * @param EngineInterface $engine
-     * @param SalesOrderRepository
+     *
      */
     public function __construct(\TCPDF $pdf, SubscriptionRepository $subscriptionRepository, EngineInterface $engine)
     {
