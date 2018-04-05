@@ -32,13 +32,13 @@ class SalesOrderRepository extends EntityRepository
     public function isRefUnique(SalesOrder $order)
     {
         $qb = $this->createQueryBuilder('so')
-            ->select('COUNT(so.id) AS counter')
-            ->innerJoin('so.branchOccurrence', 'bo')
-            ->innerJoin('bo.branch', 'b')
-            ->andWhere('so.ref = :ref')
-            ->setParameter('ref', $order->getRef())
-            ->andWhere('b.association = :association')
-            ->setParameter('association', $order->getBranchOccurrence()->getBranch()->getAssociation());
+                ->select('COUNT(so.id) AS counter')
+                ->innerJoin('so.branchOccurrence', 'bo')
+                ->innerJoin('bo.branch', 'b')
+                ->andWhere('so.ref = :ref')
+                ->setParameter('ref', $order->getRef())
+                ->andWhere('b.association = :association')
+                ->setParameter('association', $order->getBranchOccurrence()->getBranch()->getAssociation());
 
         if (null !== $order->getId()) {
             $qb->andWhere('so.id != :id')->setParameter('id', $order->getId());
@@ -53,18 +53,14 @@ class SalesOrderRepository extends EntityRepository
      * Returns a query builder which selects last sales orders linked to an association and a consumer
      *
      * @param Association $association
-     * @param User $consumer
-     * @param int $limit
-     * @param string $orderBy
+     * @param User        $consumer
+     * @param int         $limit
+     * @param string      $orderBy
      *
      * @return QueryBuilder
      */
-    public function getForAssociationAndConsumerQueryBuilder(
-        Association $association,
-        User $consumer = null,
-        $limit = null,
-        $orderBy = 'desc'
-    ) {
+    public function getForAssociationAndConsumerQueryBuilder(Association $association, User $consumer = null, $limit = null, $orderBy = 'desc')
+    {
         $qb = $this->createQueryBuilder('so')
             ->innerJoin('so.branchOccurrence', 'bo')
             ->innerJoin('bo.branch', 'b')
@@ -99,7 +95,7 @@ class SalesOrderRepository extends EntityRepository
     public function filterRef(QueryBuilder $qb, $ref)
     {
         if (null !== $ref) {
-            $qb->andWhere($qb->expr()->like('so.ref', $qb->expr()->literal('%' . $ref . '%')));
+            $qb->andWhere($qb->expr()->like('so.ref', $qb->expr()->literal('%'.$ref.'%')));
         }
 
         return $qb;
@@ -158,7 +154,7 @@ class SalesOrderRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function filterTotal(QueryBuilder $qb, $minTotal = null, $maxTotal = null)
+    public  function filterTotal(QueryBuilder $qb, $minTotal = null, $maxTotal = null)
     {
         if ($minTotal !== null) {
             $qb
@@ -186,13 +182,13 @@ class SalesOrderRepository extends EntityRepository
     public function findForProducer(Producer $producer, BranchOccurrence $branchOccurrence = null)
     {
         $qb = $this->createQueryBuilder('so')
-            ->addSelect('bo, sor')
-            ->innerJoin('so.branchOccurrence', 'bo')
-            ->innerJoin('so.salesOrderRows', 'sor')
-            ->andWhere('sor.producer = :producer')
-            ->setParameter('producer', $producer)
-            ->addOrderBy('so.id')
-            ->addOrderBy('sor.name', 'ASC');
+                ->addSelect('bo, sor')
+                ->innerJoin('so.branchOccurrence', 'bo')
+                ->innerJoin('so.salesOrderRows', 'sor')
+                ->andWhere('sor.producer = :producer')
+                ->setParameter('producer', $producer)
+                ->addOrderBy('so.id')
+                ->addOrderBy('sor.name', 'ASC');
 
         if (null !== $branchOccurrence) {
             $qb->andWhere('so.branchOccurrence = :branchOccurrence')
@@ -267,12 +263,12 @@ class SalesOrderRepository extends EntityRepository
      */
     public function getTotalForUserAndAssociation(Association $association, User $user = null)
     {
-        $qb = $this->createQueryBuilder('so')
-            ->select('SUM(so.total) AS totalSum')
-            ->innerJoin('so.branchOccurrence', 'bo')
-            ->innerJoin('bo.branch', 'b')
-            ->andWhere('b.association = :association')
-            ->setParameter('association', $association);
+         $qb = $this->createQueryBuilder('so')
+                ->select('SUM(so.total) AS totalSum')
+                ->innerJoin('so.branchOccurrence', 'bo')
+                ->innerJoin('bo.branch', 'b')
+                ->andWhere('b.association = :association')
+                ->setParameter('association', $association);
 
         if (null === $user) {
             $qb->andWhere($qb->expr()->isNull('so.user'));
@@ -297,16 +293,16 @@ class SalesOrderRepository extends EntityRepository
     public function findNotSettledForUserAndAssociation(User $user, Association $association)
     {
         return $this->createQueryBuilder('so')
-            ->innerJoin('so.branchOccurrence', 'bo')
-            ->innerJoin('bo.branch', 'b')
-            ->andWhere('so.credit < 0')
-            ->andWhere('so.user = :user')
-            ->andWhere('b.association = :association')
-            ->addOrderBy('so.id', 'ASC')
-            ->setParameter('user', $user)
-            ->setParameter('association', $association)
-            ->getQuery()
-            ->getResult();
+                ->innerJoin('so.branchOccurrence', 'bo')
+                ->innerJoin('bo.branch', 'b')
+                ->andWhere('so.credit < 0')
+                ->andWhere('so.user = :user')
+                ->andWhere('b.association = :association')
+                ->addOrderBy('so.id', 'ASC')
+                ->setParameter('user', $user)
+                ->setParameter('association', $association)
+                ->getQuery()
+                ->getResult();
     }
 
 
@@ -318,13 +314,13 @@ class SalesOrderRepository extends EntityRepository
     public function getWithRowsQueryBuilder()
     {
         return $this->createQueryBuilder('so')
-            ->addSelect('sor, p')
-            ->leftJoin('so.salesOrderRows', 'sor')
-            ->leftJoin('sor.producer', 'p')
-            ->addOrderBy('so.lastname')
-            ->addOrderBy('so.firstname')
-            ->addOrderBy('p.name')
-            ->addOrderBy('sor.name');
+                ->addSelect('sor, p')
+                ->leftJoin('so.salesOrderRows', 'sor')
+                ->leftJoin('sor.producer', 'p')
+                ->addOrderBy('so.lastname')
+                ->addOrderBy('so.firstname')
+                ->addOrderBy('p.name')
+                ->addOrderBy('sor.name');
     }
 
     /**
@@ -337,10 +333,10 @@ class SalesOrderRepository extends EntityRepository
     public function findOneWithRows($id)
     {
         return $this->getWithRowsQueryBuilder()
-            ->where('so.id = :salesOrderId')
-            ->setParameter('salesOrderId', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
+                ->where('so.id = :salesOrderId')
+                ->setParameter('salesOrderId', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
     }
 
     /**
@@ -353,8 +349,8 @@ class SalesOrderRepository extends EntityRepository
     public function findWithRowsForBranchOccurrence(BranchOccurrence $branchOccurrence)
     {
         return $this->filterBranchOccurrence($this->getWithRowsQueryBuilder(), $branchOccurrence)
-            ->getQuery()
-            ->getResult();
+                ->getQuery()
+                ->getResult();
     }
 
     /**
@@ -368,7 +364,7 @@ class SalesOrderRepository extends EntityRepository
     public function filterBranchOccurrence(QueryBuilder $qb, BranchOccurrence $branchOccurrence)
     {
         return $qb->andWhere('so.branchOccurrence = :branchOccurrence')
-            ->setParameter('branchOccurrence', $branchOccurrence);
+                ->setParameter('branchOccurrence', $branchOccurrence);
     }
 
     /**
@@ -402,16 +398,16 @@ class SalesOrderRepository extends EntityRepository
     /**
      * Filters all sales order of user
      *
-     * @param User $user
-     * @param QueryBuilder $qb
+     * @param User          $user
+     * @param QueryBuilder  $qb
      *
      * @return QueryBuilder
      */
     public function filterUser($user, QueryBuilder $qb = null)
     {
-        $qb = null === $qb ? $this->createQueryBuilder('so') : $qb;
+       $qb = null === $qb ? $this->createQueryBuilder('so') : $qb;
 
-        return $qb->join('so.branchOccurrence', 'bo')
+       return $qb->join('so.branchOccurrence', 'bo')
             ->join('bo.branch', 'b')
             ->where('so.user = :user')
             ->setParameter('user', $user);
@@ -419,7 +415,7 @@ class SalesOrderRepository extends EntityRepository
 
     /**
      * @param Association $association
-     * @param User $user
+     * @param User        $user
      *
      * @return bool
      */
@@ -435,7 +431,8 @@ class SalesOrderRepository extends EntityRepository
 
         if (null !== $user) {
             $qb->andWhere('so.user = :user')->setParameter('user', $user);
-        } else {
+        }
+        else {
             $qb->andWhere('so.user IS NULL');
         }
 
