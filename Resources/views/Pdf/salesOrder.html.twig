@@ -45,6 +45,9 @@
                             {{ 'pdf.sales_order.consumer.phone_number'|trans }} {{ order.user.phoneNumber }}
                         {% endif %}
                     </p>
+                    <p class="{{ subscription.credit >= 0 ? "positiveBalance" : "negativeBalance" }}">{{ 'pdf.sales_order.subsription.balance'|trans({'%date%': date()|localizeddate('short','short')}) }}
+                        : {{ subscription.credit|number_format_currency(open_miam_miam.currency) }}
+                    </p>
                 </td>
                 <td>
                     <h3>{{ 'pdf.sales_order.withdrawal'|trans }}</h3>
@@ -55,15 +58,6 @@
                             {{ branch.address2 }}<br/>
                         {% endif %}
                         {{ branch.zipcode }} {{ branch.city }}
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br/>
-
-                    <p class="{{ subscription.credit >= 0 ? "positiveBalance" : "negativeBalance" }}">{{ 'pdf.sales_order.subsription.balance'|trans({'%date%': date()|localizeddate('short','short')}) }}
-                        : {{ subscription.credit|number_format_currency(open_miam_miam.currency) }}
                     </p>
                 </td>
             </tr>
