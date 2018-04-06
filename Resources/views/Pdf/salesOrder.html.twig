@@ -63,7 +63,7 @@
                     <br/>
 
                     <p class="{{ subscription.credit >= 0 ? "positiveBalance" : "negativeBalance" }}">{{ 'pdf.sales_order.subsription.balance'|trans({'%date%': date()|localizeddate('short','short')}) }}
-                        : {{ subscription.credit }} &euro;
+                        : {{ subscription.credit|number_format_currency(open_miam_miam.currency) }}
                     </p>
                 </td>
             </tr>
