@@ -13,6 +13,8 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Entity\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
+use Isics\Bundle\OpenMiamMiamBundle\Entity\Subscription;
+use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 
 class SubscriptionRepository extends EntityRepository
 {
@@ -29,9 +31,9 @@ class SubscriptionRepository extends EntityRepository
         $qb = null === $qb ? $this->createQueryBuilder('s') : $qb;
 
         return $qb->leftJoin('s.user', 'u')
-                ->andWhere('s.association = :association')
-                ->setParameter('association', $association)
-                ->addOrderBy('u.id');
+            ->andWhere('s.association = :association')
+            ->setParameter('association', $association)
+            ->addOrderBy('u.id');
     }
 
     /**
@@ -66,7 +68,7 @@ class SubscriptionRepository extends EntityRepository
         if ($lastName !== null) {
             return $qb
                 ->andWhere('u.lastname LIKE :lastName')
-                ->setParameter('lastName', '%'.$lastName.'%');
+                ->setParameter('lastName', '%' . $lastName . '%');
         }
 
         return $qb;
@@ -85,7 +87,7 @@ class SubscriptionRepository extends EntityRepository
         if ($firstName !== null) {
             return $qb
                 ->andWhere('u.firstname LIKE :firstName')
-                ->setParameter('firstName', '%'.$firstName.'%');
+                ->setParameter('firstName', '%' . $firstName . '%');
         }
 
         return $qb;
@@ -112,7 +114,7 @@ class SubscriptionRepository extends EntityRepository
      * Filters users and returns the users who are not deleted
      *
      * @param QueryBuilder $qb
-     * @param boolean      $showDeleted
+     * @param boolean $showDeleted
      *
      * @return QueryBuilder
      */
@@ -126,5 +128,24 @@ class SubscriptionRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    /**
+     * Return subscription of user and his association
+     *
+     * @param User $user
+     * @param Association $association
+     * 
+     * @return Subscription
+     */
+    public function findByUserAndAssociation(User $user, Association $association)
+    {
+        $qb = $this->createQueryBuilder('su')
+            ->andWhere("su.user = :user")
+            ->andWhere("su.association = :association")
+            ->setParameter("association", $association)
+            ->setParameter("user", $user);
+
+        return $qb->getQuery()->getSingleResult();
     }
 }

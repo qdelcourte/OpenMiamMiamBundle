@@ -983,6 +983,7 @@ pdf.sales_order.price:                  "Prix"
 pdf.sales_order.quantity:               "Quantité"
 pdf.sales_order.row_total:              "Total"
 pdf.sales_order.total:                  "TOTAL"
+pdf.sales_order.subsription.balance:    "Solde au %date%"
 pdf.products_to_prepare.title:          "Produits à préparer"
 pdf.products_to_prepare.producer:       "Producteur"
 pdf.products_to_prepare.ref:            "Réf."
@@ -992,6 +993,7 @@ pdf.products_to_prepare.quantity:       "Quantité"
 pdf.products_to_prepare.total:          "Total"
 pdf.producer_sales_orders.title:        "Commandes"
 pdf.producer_sales_orders.producer:     "Producteur :"
+
 
 
 
