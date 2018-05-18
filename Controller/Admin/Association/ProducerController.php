@@ -138,7 +138,7 @@ class ProducerController extends BaseController
         $response->setCallback(function() use ($document, $producerTransfer) {
             $document->generate($producerTransfer);
 
-            $writer = new \PHPExcel_Writer_Excel2007($document->getExcel());
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($document->getExcel());
 
             $writer->save('php://output');
         });
