@@ -15,11 +15,16 @@ use Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Tools;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\BranchOccurrence;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Document\ProducersDepositWithdrawal;
 use Symfony\Component\Translation\TranslatorInterface;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class DepositWithdrawalExcel
 {
     /**
-     * @var \PhpOffice\PhpSpreadsheet\Spreadsheet
+     * @var Spreadsheet
      */
     protected $excel;
 
@@ -78,11 +83,11 @@ class DepositWithdrawalExcel
     /**
      * Constructor
      *
-     * @param \PhpOffice\PhpSpreadsheet\Spreadsheet $excel
+     * @param Spreadsheet $excel
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
      * @param $currency
      */
-    public function __construct(\PhpOffice\PhpSpreadsheet\Spreadsheet $excel, TranslatorInterface $translator, $currency)
+    public function __construct(Spreadsheet $excel, TranslatorInterface $translator, $currency)
     {
         $this->excel        = $excel;
         $this->translator   = $translator;
@@ -103,26 +108,26 @@ class DepositWithdrawalExcel
 
         $this->styles['center'] = array(
             'alignment'=>array(
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
+                'horizontal' => Alignment::HORIZONTAL_CENTER
             )
         );
 
         $this->styles['vertical_center'] = array(
             'alignment'=>array(
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
+                'vertical' => Alignment::VERTICAL_CENTER
             )
         );
 
         $this->styles['right'] = array(
             'alignment'=>array(
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT
+                'horizontal' => Alignment::HORIZONTAL_RIGHT
             )
         );
 
         $this->styles['border'] = array(
             'borders' => array(
                 'allborders' => array(
-                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'style' => Border::BORDER_THIN,
                 ),
             )
         );
@@ -176,7 +181,7 @@ class DepositWithdrawalExcel
         $sheet->setTitle($this->translator->trans(
             'excel.association.sales_orders.deposit_withdrawal.summary_title'
         ));
-        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_PORTRAIT);
+        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_PORTRAIT);
 
         $currentLine = 1;
 
@@ -186,13 +191,13 @@ class DepositWithdrawalExcel
     /**
      * Add title in document
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet       La feuille de calcul
-     * @param int                 $line        La ligne courante
-     * @param string              $title       Le titre
-     * @param string              $firstColumn First column
-     * @param string              $lastColumn  Last column
+     * @param Worksheet $sheet       La feuille de calcul
+     * @param int       $line        La ligne courante
+     * @param string    $title       Le titre
+     * @param string    $firstColumn First column
+     * @param string    $lastColumn  Last column
      */
-    protected function generateTitle(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, &$line, $title, $firstColumn = null, $lastColumn = null)
+    protected function generateTitle(Worksheet $sheet, &$line, $title, $firstColumn = null, $lastColumn = null)
     {
         $firstCell = (null !== $firstColumn ? $firstColumn : $this->firstColumn).$line;
         $lastCell = (null !== $lastColumn ? $lastColumn : $this->lastColumn).$line;
@@ -200,7 +205,7 @@ class DepositWithdrawalExcel
         // Merge cells for document title
         $sheet->mergeCells($firstCell.':'.$lastCell);
         $sheet->setCellValue($firstCell, $title);
-        $sheet->getStyle($firstCell)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+        $sheet->getStyle($firstCell)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle($firstCell)->applyFromArray(array_merge(
             $this->styles['center'],
             $this->styles['bold']
@@ -213,11 +218,11 @@ class DepositWithdrawalExcel
     /**
      * Generate summary page
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Data sheet
-     * @param int                        $line                      Current line
+     * @param Worksheet                  $sheet Data sheet
+     * @param int                        $line  Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Producer deposit / withdrawal model
      */
-    protected function generateSummaryPage(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateSummaryPage(Worksheet $sheet,
                                            &$line,
                                            ProducersDepositWithdrawal $producerDepositWithdrawal)
     {
@@ -442,14 +447,14 @@ class DepositWithdrawalExcel
     }
 
     /**
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Data sheet
+     * @param Worksheet                  $sheet                     Data sheet
      * @param int                        $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Producer deposit / withdrawal model
      * @param int                        $producerId                Producer id
      * @param string                     $producerName              Producer name
      * @param array                      $commissionRateColumns     Commission rate columns
      */
-    protected function generateSummaryPageProducer(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateSummaryPageProducer(Worksheet $sheet,
                                                    &$line,
                                                    ProducersDepositWithdrawal $producerDepositWithdrawal,
                                                    $producerId,
@@ -513,14 +518,14 @@ class DepositWithdrawalExcel
     /**
      * Generate a producer part of the document
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Data sheet
+     * @param Worksheet                  $sheet                     Data sheet
      * @param                            $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Producer deposit / withdrawal model
      * @param                            $producerId                Producer id
      * @param                            $producerName              Producer name
      * @param                            $producerTab               Producer tab data
      */
-    protected function generateProducer(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducer(Worksheet $sheet,
                                         &$line,
                                         ProducersDepositWithdrawal $producerDepositWithdrawal,
                                         $producerId,
@@ -614,10 +619,10 @@ class DepositWithdrawalExcel
     /**
      * Generate producer table header
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet        Active sheet
-     * @param int                 $line         Current line
+     * @param Worksheet $sheet        Active sheet
+     * @param int       $line         Current line
      */
-    protected function generateProducerTableHeader(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, &$line)
+    protected function generateProducerTableHeader(Worksheet $sheet, &$line)
     {
         // title for product ref
         $sheet->setCellValue(
@@ -677,11 +682,11 @@ class DepositWithdrawalExcel
     /**
      * Generate producer table product line
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet
-     * @param int                 $line
-     * @param array               $product
+     * @param Worksheet $sheet
+     * @param int       $line
+     * @param array     $product
      */
-    protected function generateProducerTableProduct(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, $line, array $product)
+    protected function generateProducerTableProduct(Worksheet $sheet, $line, array $product)
     {
         // Product reference
         $sheet->setCellValue(
@@ -736,13 +741,13 @@ class DepositWithdrawalExcel
     /**
      * Generate sales order total
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Active sheet
+     * @param Worksheet                  $sheet                     Active sheet
      * @param int                        $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Model
      * @param int                        $producerId                Producer id
      * @param array                      $producerTab               Producer tab data
      */
-    protected function generateProducerSalesOrdersTotal(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducerSalesOrdersTotal(Worksheet $sheet,
                                                         $line,
                                                         ProducersDepositWithdrawal $producerDepositWithdrawal,
                                                         $producerId,
@@ -779,12 +784,12 @@ class DepositWithdrawalExcel
     /**
      * Generate producer branch occurrence sales orders total
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Active sheet
+     * @param Worksheet                  $sheet                     Active sheet
      * @param int                        $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Model
      * @param int                        $producerId                Producer id
      */
-    protected function generateProducerBranchSalesOrdersTotal(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducerBranchSalesOrdersTotal(Worksheet $sheet,
                                                               $line,
                                                               ProducersDepositWithdrawal $producerDepositWithdrawal,
                                                               $producerId)
@@ -813,13 +818,13 @@ class DepositWithdrawalExcel
     /**
      * Generate producer total
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Active sheet
+     * @param Worksheet                  $sheet                     Active sheet
      * @param int                        $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Model
      * @param int                        $producerId                Producer id
      * @param array                      $producerTab               Producer tab
      */
-    protected function generateProducerTotal(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducerTotal(Worksheet $sheet,
                                              $line,
                                              ProducersDepositWithdrawal $producerDepositWithdrawal,
                                              $producerId,
@@ -852,12 +857,12 @@ class DepositWithdrawalExcel
     /**
      * Generate producer commission line
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet                     Active sheet
+     * @param Worksheet           $sheet                     Active sheet
      * @param int                 $line                      Current line
      * @param float               $commissionRate            Commission rate
      * @param float               $commissionTotal           Commission total
      */
-    protected function generateProducerCommission(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducerCommission(Worksheet $sheet,
                                                   $line,
                                                   $commissionRate,
                                                   $commissionTotal)
@@ -886,13 +891,13 @@ class DepositWithdrawalExcel
     /**
      * Generate producer to pay up
      *
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet        $sheet                     Active sheet
+     * @param Worksheet                  $sheet                     Active sheet
      * @param int                        $line                      Current line
      * @param ProducersDepositWithdrawal $producerDepositWithdrawal Model
      * @param int                        $producerId                Producer id
      * @param array                      $producerTab               Producer tab
      */
-    protected function generateProducerToPayUp(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet,
+    protected function generateProducerToPayUp(Worksheet $sheet,
                                                $line,
                                                ProducersDepositWithdrawal $producerDepositWithdrawal,
                                                $producerId,
@@ -934,11 +939,11 @@ class DepositWithdrawalExcel
     }
 
     /**
-     * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Active sheet
+     * @param Worksheet           $sheet Active sheet
      * @param string              $cell  Cell
      * @param string              $value Value
      */
-    private function writeCurrencyNumber(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet, $cell, $value)
+    private function writeCurrencyNumber(Worksheet $sheet, $cell, $value)
     {
         $sheet->setCellValue($cell, $value);
         $sheet->getStyle($cell)->getNumberFormat()->setFormatCode(
@@ -967,7 +972,7 @@ class DepositWithdrawalExcel
     /**
      * Get excel
      *
-     * @return \PhpOffice\PhpSpreadsheet\Spreadsheet
+     * @return Spreadsheet
      */
     public function getExcel()
     {

@@ -32,6 +32,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class SalesOrderController extends BaseController
 {
@@ -510,7 +511,7 @@ class SalesOrderController extends BaseController
         $response->setCallback(function() use ($document, $producerTransfer, $branchOccurrence) {
             $document->generate($producerTransfer, $branchOccurrence);
 
-            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($document->getExcel());
+            $writer = new Xlsx($document->getExcel());
 
             $writer->save('php://output');
         });

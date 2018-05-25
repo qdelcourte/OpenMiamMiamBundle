@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class ProducerController extends BaseController
@@ -138,7 +139,7 @@ class ProducerController extends BaseController
         $response->setCallback(function() use ($document, $producerTransfer) {
             $document->generate($producerTransfer);
 
-            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($document->getExcel());
+            $writer = new Xlsx($document->getExcel());
 
             $writer->save('php://output');
         });
