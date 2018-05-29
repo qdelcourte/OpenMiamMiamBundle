@@ -43,7 +43,7 @@ parameters:
     open_miam_miam.menu_voter.class:   'Isics\Bundle\OpenMiamMiamBundle\Menu\Voter'
 
     open_miam_miam.sales_order_statistics.class:                  'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\Statistics'
-    open_miam_miam.phpexcel.class:                                PHPExcel
+    open_miam_miam.phpspreadsheet.class:                          PhpOffice\PhpSpreadsheet\Spreadsheet
     open_miam_miam.tcpdf.class:                                   TCPDF
     open_miam_miam.pdf.class:                                     'Isics\Bundle\OpenMiamMiamBundle\Document\OpenMiamMiamPDF'
     open_miam_miam.sales_orders_pdf.class:                        'Isics\Bundle\OpenMiamMiamBundle\Model\SalesOrder\SalesOrdersPdf'
@@ -418,8 +418,8 @@ services:
         class:     %open_miam_miam.sales_order_statistics.class%
         arguments: ['@doctrine.orm.entity_manager']
 
-    open_miam_miam.phpexcel:
-        class: %open_miam_miam.phpexcel.class%
+    open_miam_miam.phpspreadsheet:
+        class: %open_miam_miam.phpspreadsheet.class%
         shared: false
         public: false
 
@@ -455,7 +455,7 @@ services:
     open_miam_miam.association.producer.transfer:
         class:     %open_miam_miam.association.producer.transfer.class%
         arguments:
-            - '@open_miam_miam.phpexcel'
+            - '@open_miam_miam.phpspreadsheet'
             - '@translator'
             - %open_miam_miam.currency%
         shared: false
@@ -463,7 +463,7 @@ services:
     open_miam_miam.association.deposit_withdrawal:
         class:     %open_miam_miam.association.deposit_withdrawal.class%
         arguments:
-            - '@open_miam_miam.phpexcel'
+            - '@open_miam_miam.phpspreadsheet'
             - '@translator'
             - %open_miam_miam.currency%
         shared: false
