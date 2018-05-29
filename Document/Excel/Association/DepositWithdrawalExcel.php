@@ -14,12 +14,12 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Association;
 use Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Tools;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\BranchOccurrence;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Document\ProducersDepositWithdrawal;
-use Symfony\Component\Translation\TranslatorInterface;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class DepositWithdrawalExcel
 {

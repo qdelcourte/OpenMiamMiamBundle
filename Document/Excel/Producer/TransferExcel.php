@@ -13,11 +13,11 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Producer;
 
 use Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Tools;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Document\ProducersTransfer;
-use Symfony\Component\Translation\TranslatorInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TransferExcel
 {

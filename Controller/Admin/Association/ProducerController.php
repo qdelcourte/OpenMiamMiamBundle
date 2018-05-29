@@ -15,11 +15,10 @@ use Isics\Bundle\OpenMiamMiamBundle\Entity\Association;
 use Isics\Bundle\OpenMiamMiamBundle\Entity\AssociationHasProducer;
 use Isics\Bundle\OpenMiamMiamBundle\Form\Type\AssociationHasProducerType;
 use Isics\Bundle\OpenMiamMiamBundle\Form\Type\AssociationProducerExportTransferType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class ProducerController extends BaseController
