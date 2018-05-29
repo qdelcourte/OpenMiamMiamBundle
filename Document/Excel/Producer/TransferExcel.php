@@ -13,12 +13,16 @@ namespace Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Producer;
 
 use Isics\Bundle\OpenMiamMiamBundle\Document\Excel\Tools;
 use Isics\Bundle\OpenMiamMiamBundle\Model\Document\ProducersTransfer;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class TransferExcel
 {
     /**
-     * @var \PHPExcel
+     * @var Spreadsheet
      */
     protected $excel;
 
@@ -35,10 +39,10 @@ class TransferExcel
     /**
      * Constructor
      *
-     * @param \PHPExcel                                 $excel
+     * @param Spreadsheet                               $excel
      * @param \Symfony\Component\Translation\Translator $translator
      */
-    public function __construct(\PHPExcel $excel, TranslatorInterface $translator, $currency)
+    public function __construct(Spreadsheet $excel, TranslatorInterface $translator, $currency)
     {
         $this->excel      = $excel;
         $this->translator = $translator;
@@ -54,7 +58,7 @@ class TransferExcel
     {
         $this->excel->setActiveSheetIndex(0);
         $sheet = $this->excel->getActiveSheet();
-        $sheet->getPageSetup()->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
 
         $formatter = new \NumberFormatter($this->translator->getLocale(), \NumberFormatter::CURRENCY);
         $intl = new \IntlDateFormatter($this->translator->getLocale(), \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, null, null, 'MMMM yyyy');
@@ -67,20 +71,20 @@ class TransferExcel
 
         $centerStyle = array(
             'alignment'=>array(
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+                'horizontal' => Alignment::HORIZONTAL_CENTER
             )
         );
 
         $rightStyle = array(
             'alignment'=>array(
-                'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_RIGHT
+                'horizontal' => Alignment::HORIZONTAL_RIGHT
             )
         );
 
         $borderStyle = array(
             'borders' => array(
                 'outline' => array(
-                    'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                    'style' => Border::BORDER_THIN,
                     'color' => array('argb' => 'FF000000'),
                 ),
             )
@@ -120,7 +124,7 @@ class TransferExcel
             ucfirst($intl->format($producersTransfer->getDate()))."\n\n".
             $this->translator->trans('excel.association.producer.transfer.title')
         );
-        $sheet->getStyle('B1')->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $sheet->getStyle('B1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
         $sheet->getStyle('B1')->applyFromArray(array_merge($centerStyle, $boldStyle));
         $sheet->getRowDimension('1')
             ->setRowHeight(50);
@@ -236,7 +240,7 @@ class TransferExcel
     /**
      * Get excel
      *
-     * @return \PHPExcel
+     * @return Spreadsheet
      */
     public function getExcel()
     {

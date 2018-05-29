@@ -28,6 +28,7 @@ use Isics\Bundle\OpenMiamMiamUserBundle\Entity\User;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -510,7 +511,7 @@ class SalesOrderController extends BaseController
         $response->setCallback(function() use ($document, $producerTransfer, $branchOccurrence) {
             $document->generate($producerTransfer, $branchOccurrence);
 
-            $writer = new \PHPExcel_Writer_Excel2007($document->getExcel());
+            $writer = new Xlsx($document->getExcel());
 
             $writer->save('php://output');
         });
