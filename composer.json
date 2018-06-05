@@ -30,7 +30,8 @@
     "symfony/assetic-bundle": "2.8.*",
     "tecnickcom/tcpdf": "6.0.068",
     "twig/extensions": "1.3.*",
-    "white-october/pagerfanta-bundle": "~1.0.7"
+    "white-october/pagerfanta-bundle": "~1.0.7",
+    "api-platform/api-platform": "^2.1"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^2.3",
