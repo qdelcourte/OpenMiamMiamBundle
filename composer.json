@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "doctrine/dbal": "<2.5",
+    "doctrine/dbal": "~2.4",
     "doctrine/doctrine-bundle": "1.6.*",
     "friendsofsymfony/user-bundle": "v2.1.*",
     "isics/openmiammiam-user-bundle": "dev-master",
